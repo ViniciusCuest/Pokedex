@@ -5,3 +5,12 @@
 body {
     font-family: 'Nunito';
 }
+
+div::-webkit-scrollbar,section::-webkit-scrollbar {
+    display: none;
+}
+
+div,section {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
