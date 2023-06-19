@@ -1,5 +1,5 @@
 import { ScrollContainer } from '@/components/ScrollContainer';
-import { DataProps, ResultDataProps } from '@/types/api.types';
+import { DataProps } from '@/types/api.types';
 
 export default async function Home() {
 

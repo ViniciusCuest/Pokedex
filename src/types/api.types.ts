@@ -13,7 +13,13 @@ export type ResultDataProps = {
     species: {};
     sprites: {};
     stats: [];
-    types: [];
+    types: [{
+        slot: number;
+        type: {
+            name: string;
+            url: string;
+        }
+    }];
     weight: number;
 }
 

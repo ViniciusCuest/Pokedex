@@ -12,18 +12,9 @@ export function ScrollContainer({ data }: DataProps) {
          <h1 className='text-3xl font-bold font-sans text-black_900 mb-4 sm:mb-8 sm:text-6xl sm:fixed sm:mt-[-6rem]'>Favoritos</h1>
          <div className='grid w-auto gap-4 gap-x-4 grid-cols-2 sm:flex sm:flex-row sm:gap-x-11 sm:min-w-fit sm:overflow-x-scroll'>
             {
-               data.map((item: ResultDataProps) => {
-                  console.log(item);
-                  return (
-                     <Cards>
-                        <h1>
-                           {
-                              item.name
-                           }
-                        </h1>
-                     </Cards>
-                  )
-               })
+               data.map((item: ResultDataProps) => (
+                  <Cards key={String(item.id)} {...item} />
+               ))
             }
          </div>
       </section>

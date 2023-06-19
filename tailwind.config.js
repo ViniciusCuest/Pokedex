@@ -19,8 +19,15 @@ module.exports = {
       min_red: '#FF3333',
       min_blue: '#57A4FF',
       min_orange: '#FFB545',
-      black_900: '#313131'
+      black_900: '#313131',
+      gray_500: '#D9D9D9',
+      fire1: '#FF5C00',
+      fire2: '#FF8038',
+      water1: '#0F55A8',
+      water2: '#AED3FF',
+      white: '#fafafa'
     }
   },
   plugins: [],
 }
+//d58103
