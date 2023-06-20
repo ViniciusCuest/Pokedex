@@ -11,7 +11,13 @@ export type ResultDataProps = {
     past_types: [];
     location_area_encounters: string;
     species: {};
-    sprites: {};
+    sprites: {
+        other: {
+            dream_world: {
+                front_default: string;
+            }
+        } 
+    };
     stats: [];
     types: [{
         slot: number;
