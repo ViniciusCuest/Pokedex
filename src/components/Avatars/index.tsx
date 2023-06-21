@@ -9,9 +9,6 @@ interface Props {
 }  
 
 export function Avatar({ src, type = 'default', className }: Props) {
-   useEffect(() => {
-      console.log(src);
-   }, [])
 
    return type === 'default' ?
       (<div

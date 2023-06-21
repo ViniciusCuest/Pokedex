@@ -25,7 +25,13 @@ async function getPokemonData(): Promise<DataProps[]> {
   const data = await Promise.all(
     results.map(async (pokemon: any) => {
       const response = await fetch(`${pokemon.url}`);
-      return response.json();
+      const body = await response.json();
+      return {
+        ...body,
+        evolve: await (
+          await fetch(`https://pokeapi.co/api/v2/evolution-chain/${body?.id}/`)
+        ).json()
+      };
     })
   );
 

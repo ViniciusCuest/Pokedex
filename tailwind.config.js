@@ -44,7 +44,8 @@ module.exports = {
       bug2: '#60FBCD',
       water1: '#0F55A8',
       water2: '#AED3FF',
-      white: '#fafafa'
+      white: '#fafafa',
+      gray_700: '#9F9F9F'
     }
   },
   plugins: [],

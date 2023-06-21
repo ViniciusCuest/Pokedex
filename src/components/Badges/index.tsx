@@ -19,11 +19,6 @@ export function Badge({ title }: Props) {
       normal: 'bg-gradient-to-r from-normall to-normal2'
    }
 
-   useEffect(() => {
-      console.log()
-   }, []);
-
-
    return (
       <div className={`flex justify-center items-center w-14 h-4 rounded-lg ${badgeColor[title]} sm:w-20 sm:h-6`}>
          <h1 className='text-[.75rem] font-sans font-bold text-white sm:text-sm'>
