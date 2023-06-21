@@ -5,6 +5,8 @@ import { Badge } from "../Badges";
 import { objType } from "@/types/color.props";
 import { ReactElement } from "react";
 
+import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
+
 export function Cards({ name, types, sprites, id, evolve }: ResultDataProps): ReactElement {
    const cardColor: objType = {
       bug: 'bg-gradient-to-b from-max_cyan to-min_cyan',
@@ -18,7 +20,10 @@ export function Cards({ name, types, sprites, id, evolve }: ResultDataProps): Re
 
    return (
       <section
-         className={`${cardColor[types[0].type.name]} w-[calc((100% / 2) - (1.25rem * 2 + 1rem)] shadow-lg h-44 p-2 rounded-lg sm:rounded-lg sm:w-96 sm:h-80 sm:p-6`}>
+         className={`relative ${cardColor[types[0].type.name]} w-[calc((100% / 2) - (1.25rem * 2 + 1rem)] shadow-lg h-44 p-2 rounded-lg sm:rounded-lg sm:w-96 sm:h-80 sm:p-6`}>
+         <button className="absolute top-0 right-0 m-5">
+            <AiFillStar className='w-9 h-9 fill-max_orange' />
+         </button>
          <span className="flex flex-row justify-items-center items-center">
             <Avatar src={`${sprites?.other.dream_world.front_default}`} />
             <div
@@ -51,7 +56,7 @@ export function Cards({ name, types, sprites, id, evolve }: ResultDataProps): Re
          </section>
          <span className="flex flex-row space-x-2 mt-4">
             <h3 className='text-xl font-sans font-medium text-white'>Evolução: </h3>
-            <p className="text-xl font-sans font-bold text-white">{evolve.chain.evolves_to[0].species.name[0].toUpperCase() + evolve.chain.evolves_to[0].species.name.substring(1) }</p>
+            <p className="text-xl font-sans font-bold text-white">{evolve.chain.evolves_to[0].species.name[0].toUpperCase() + evolve.chain.evolves_to[0].species.name.substring(1)}</p>
          </span>
       </section>
    );
