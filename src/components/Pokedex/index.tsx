@@ -6,9 +6,10 @@ import { Dispatch, SetStateAction } from "react";
 
 type Props = {
   search: Dispatch<SetStateAction<string>>
+  changeScrollPosition: (next?: boolean) => void;
 }
 
-export function Pokedex({ search }: Props) {
+export function Pokedex({ search, changeScrollPosition }: Props) {
   return (
     <>
       <div className='absolute top-0 mt-52 mr-8 shadow-xl right-0 z-30 border-white border-[16px] rounded-xl'>
@@ -24,10 +25,10 @@ export function Pokedex({ search }: Props) {
           >
             <InputText changeValue={search} />
             <div className='flex flex-row items-center justify-between px-2'>
-              <Button title="Anterior" right>
+              <Button onPress={() => changeScrollPosition()} title="Anterior" right>
                 <MdOutlineNavigateBefore size={30} fill="#fff" />
               </Button>
-              <Button title="Próximo">
+              <Button onPress={() => changeScrollPosition(true)} title="Próximo">
                 <MdOutlineNavigateNext size={30} fill="#fff" />
               </Button>
             </div>

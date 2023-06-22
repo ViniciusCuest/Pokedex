@@ -16,7 +16,7 @@ export function InputText({ changeValue } : Props) {
         type="text"
         onChange={(e) => { changeValue(e.target.value) }}
         placeholder="#"
-        className='bg-background w-full h-12 font-sans font-medium text-lg rounded-lg shadow-lg px-2'
+        className='bg-background outline-none w-full h-12 font-sans font-medium text-lg rounded-lg shadow-lg px-2'
       />
     </div>
 
