@@ -6,8 +6,6 @@ import { DataProps, ResultDataProps } from "@/types/api.types";
 import { Pokedex } from "../Pokedex";
 
 export function ScrollContainer({ data }: DataProps) {
-
-   useEffect(() => { console.log(data) }, []);
    return (
       <main>
          <h1 className='text-3xl font-bold font-sans text-black_900 mb-4 sm:mb-8 sm:text-6xl sm:absolute sm:ml-10 sm:mt-4'>Favoritos</h1>
@@ -17,7 +15,6 @@ export function ScrollContainer({ data }: DataProps) {
                {
 
                   data.map((item: ResultDataProps) => {
-                     console.log(item);
                      return (
                         <Cards key={String(item.id)} {...item} />
                      )

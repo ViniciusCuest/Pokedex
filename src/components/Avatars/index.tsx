@@ -5,18 +5,20 @@ import { ClassAttributes, useEffect } from "react";
 interface Props {
    src: string;
    className?: string;
+   alt?: string
    type?: 'default' | 'small';
 }  
 
-export function Avatar({ src, type = 'default', className }: Props) {
+export function Avatar({ src, type = 'default', alt, className }: Props) {
 
    return type === 'default' ?
       (<div
-         className='relative flex items-center justify-center w-20 h-20 bg-gray_500 rounded-2xl border-4 border-white sm:w-32 sm:h-32'
+         className={`relative flex items-center justify-center w-20 h-20 bg-gray_500 rounded-2xl border-4 border-white sm:w-32 sm:h-32 ${className}`}
       >
          < Image
-            alt="pokemon-image"
+            alt={alt}
             src={src}
+            className={className}
             layout='fill'
          />
       </div >)

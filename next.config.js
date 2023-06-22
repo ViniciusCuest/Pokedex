@@ -8,6 +8,12 @@ const nextConfig = {
                 hostname: 'raw.githubusercontent.com',
                 port: '',
                 pathname: '/PokeAPI/**'
+            }, 
+            {
+              protocol: 'https',
+              hostname: 'avatars.githubusercontent.com',
+              port: '',
+              pathname: '/u/**'
             }
         ]
     }
