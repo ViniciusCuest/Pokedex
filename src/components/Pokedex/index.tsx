@@ -2,7 +2,13 @@ import { Avatar } from "../Avatars";
 import { Button } from "../Button";
 import { MdOutlineNavigateNext, MdOutlineNavigateBefore } from 'react-icons/md'
 import { InputText } from "../InputText";
-export function Pokedex() {
+import { Dispatch, SetStateAction } from "react";
+
+type Props = {
+  search: Dispatch<SetStateAction<string>>
+}
+
+export function Pokedex({ search }: Props) {
   return (
     <>
       <div className='absolute top-0 mt-52 mr-8 shadow-xl right-0 z-30 border-white border-[16px] rounded-xl'>
@@ -16,7 +22,7 @@ export function Pokedex() {
             className='mt-16 space-y-14'
             onSubmit={(e) => e.preventDefault()}
           >
-            <InputText />
+            <InputText changeValue={search} />
             <div className='flex flex-row items-center justify-between px-2'>
               <Button title="Anterior" right>
                 <MdOutlineNavigateBefore size={30} fill="#fff" />
