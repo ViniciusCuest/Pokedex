@@ -20,13 +20,12 @@ export function ScrollContainer({ data }: DataProps) {
 
     const toIndex: number = next ? currentIndex + 1 : currentIndex - 1;
 
-    console.log('CÁLCULO INDEX > 1: ', (currentCardWidth * 3 + (cardsGap * 3)) * toIndex + 17);
+    //console.log('CÁLCULO INDEX > 1: ', (currentCardWidth * 3 + (cardsGap * 3)) * toIndex + 17);
     //console.log('INDEX == 1', currentCardWidth * toIndex * 3 + (cardsGap * 3 + 18))
-
-
+    
     scrollComponentRef.current?.scrollTo({
       behavior: 'smooth',
-      left: toIndex === 1 ? currentCardWidth * 3 + (cardsGap * 3 + 18) : (currentCardWidth * 3 + (cardsGap * 3)) * toIndex + 17
+      left: toIndex <= 1 ? (currentCardWidth * 3 + (cardsGap * 3 + 18)) * toIndex : (currentCardWidth * 3 + (cardsGap * 3)) * toIndex + 17
     });
 
     setCurrentIndex(toIndex);
@@ -47,11 +46,8 @@ export function ScrollContainer({ data }: DataProps) {
         onLoad={(e) => {
           //setMaxScrollableLength(e.currentTarget.scrollWidth + 592 + 56)
         }}
-        className='relative pt-10 px-5 sm:pt-32 sm:mt-14 sm:pl-14 sm:pr-[37rem] sm:mr-9 sm:overflow-x-scroll sm:overflow-y-hidden'>
+        className='relative pt-10 px-5 sm:pt-32 sm:mt-14 sm:pl-14 sm:pr-[37rem] sm:mr-9 sm:overflow-x-scroll sm:overflow-y-hidden select-none'>
         <div
-          onLoad={(e) => {
-            const { clientWidth } = e.currentTarget;
-          }}
           className='grid w-auto gap-4 gap-x-4 grid-cols-2 sm:flex sm:flex-row sm:gap-x-11 sm:min-w-fit sm:p-5 sm:ml-[-.9rem]'>
           {
             data.filter((item: ResultDataProps) => String(item.id) === search ||
@@ -68,6 +64,5 @@ export function ScrollContainer({ data }: DataProps) {
         search={setSearch}
       />
     </main>
-
   );
 }
