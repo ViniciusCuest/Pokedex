@@ -7,7 +7,7 @@ export default async function Home() {
 
   return (
     <main className='overflow-x-hidden'>
-      <Header/>
+      <Header />
       <ScrollContainer data={data} />
       <section className='mt-24 px-5 sm:pt-20 sm:pl-14 sm:pr-10'>
         <h1 className='text-3xl font-bold font-sans text-black_900 mb-4 sm:mb-8 sm:text-6xl'>Lendários</h1>
@@ -34,6 +34,10 @@ async function getPokemonData(): Promise<DataProps[]> {
       };
     })
   );
+
+  setTimeout(() => {
+
+  }, 10000);
 
   return data;
 }
