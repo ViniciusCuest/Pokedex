@@ -1,9 +1,8 @@
-'use client'
 import './globals.css'
 import { Nunito } from 'next/font/google';
-import { Suspense } from 'react'
-import PokeLottie from '../../public/67858-pokemon.json';
 import Loading from './loading';
+import { Suspense } from 'react';
+import Head from 'next/head';
 
 const nunito = Nunito({
   subsets: ['latin'],
@@ -21,12 +20,13 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-
   return (
     <html lang="en" className={`${nunito.variable}`}>
       <body className='bg-background'>
-        <Suspense fallback={<Loading src={PokeLottie} />}>
-          {children}
+        <Suspense fallback={<Loading />}>
+          {
+            children
+          }
         </Suspense>
       </body>
     </html>

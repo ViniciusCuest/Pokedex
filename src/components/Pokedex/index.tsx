@@ -20,10 +20,14 @@ export function Pokedex({ search, changeScrollPosition }: Props) {
             className='rounded-full sm:border-black_900 border-8 sm:w-44 sm:h-44'
           />
           <form
+            id="pokedex"
             className='mt-16 space-y-14'
             onSubmit={(e) => e.preventDefault()}
           >
-            <InputText changeValue={search} />
+            <InputText 
+              id="search"
+              changeValue={search} 
+              />
             <div className='flex flex-row items-center justify-between px-2'>
               <Button onPress={() => changeScrollPosition()} title="Anterior" right>
                 <MdOutlineNavigateBefore size={30} fill="#fff" />

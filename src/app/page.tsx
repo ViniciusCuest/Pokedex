@@ -1,9 +1,9 @@
+import { ApolloClient, HttpLink, InMemoryCache, gql } from "@apollo/client";
+import { registerApolloClient } from "@apollo/experimental-nextjs-app-support/rsc";
+
 import { Header } from '@/components/Header';
 import { ScrollContainer } from '@/components/ScrollContainer';
 import { DataProps } from '@/types/api.types';
-
-import { ApolloClient, HttpLink, InMemoryCache, gql } from "@apollo/client";
-import { registerApolloClient } from "@apollo/experimental-nextjs-app-support/rsc";
 
 const query = gql`{
   poke: pokemon_v2_pokemon(limit: 100) {
@@ -18,6 +18,9 @@ const query = gql`{
       }
     }
     pokemon_v2_pokemonspecy {
+      is_legendary
+      is_mythical
+      is_baby
       pokemon_v2_evolutionchain {
         id
         pokemon_v2_pokemonspecies {
@@ -32,29 +35,25 @@ const query = gql`{
       sprites
     }
   }
+  legendary: pokemon_v2_pokemon(limit: 20 where: {pokemon_v2_pokemonspecy: {is_legendary: {_eq: true}}}) {
+    id
+    name
+    weight
+    height
+    pokemon_species_id
+    pokemon_v2_pokemonspecy {
+      is_legendary
+      is_mythical
+      is_baby
+    }
+    pokemon_v2_pokemonsprites {
+      sprites
+      id
+      pokemon_id
+    }
+  }
 }
 `;
-
-export default async function Home() {
-  const { data }: DataProps[] | any = await getClient().query({
-    query
-  });
-  console.log(data);
-
-  return (
-    <main className='overflow-x-hidden'>
-      <Header data={data} />
-      {
-        <ScrollContainer data={data.poke} />
-      }
-      <Header />
-      <ScrollContainer data={data} />
-      <section className='mt-24 px-5 sm:pt-20 sm:pl-14 sm:pr-10'>
-        <h1 className='text-3xl font-bold font-sans text-black_900 mb-4 sm:mb-8 sm:text-6xl'>Lendários</h1>
-      </section>
-    </main>
-  );
-}
 
 export const { getClient } = registerApolloClient(() => {
   return new ApolloClient({
@@ -63,33 +62,20 @@ export const { getClient } = registerApolloClient(() => {
       uri: 'https://beta.pokeapi.co/graphql/v1beta'
     })
   })
-})
-
-/*
-async function getPokemonData(): Promise<DataProps[]> {
-  const response = await fetch('https://pokeapi.co/api/v2/pokemon', {
-    cache: 'no-store'
+});
+export default async function Home() {
+  const { data }: DataProps[] | any = await getClient().query({
+    query
   });
-  const { results } = await response.json();
+  return (
+    <section className='overflow-x-hidden'>
+      <Header />
+      <ScrollContainer data={data.poke} />
 
-  const data = await Promise.all(
-    results.map(async (pokemon: any) => {
-      const response = await fetch(`${pokemon.url}`);
-      const body = await response.json();
-      return {
-        ...body,
-        evolve: await (
-          await fetch(`https://pokeapi.co/api/v2/evolution-chain/${body?.id}/`)
-        ).json()
-      };
-    })
+      <section className='mt-24 px-5 sm:pt-20 sm:pl-14 sm:pr-10'>
+        <h1 className='text-3xl font-bold font-sans text-black_900 mb-4 sm:mb-8 sm:text-6xl'>Lendários</h1>
+      </section>
+      <ScrollContainer data={data.legendary} />
+    </section>
   );
-
-  setTimeout(() => {
-
-  }, 10000);
-
-  return data;
 }
-
-*/
