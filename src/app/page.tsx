@@ -47,6 +47,8 @@ export default async function Home() {
       {
         <ScrollContainer data={data.poke} />
       }
+      <Header />
+      <ScrollContainer data={data} />
       <section className='mt-24 px-5 sm:pt-20 sm:pl-14 sm:pr-10'>
         <h1 className='text-3xl font-bold font-sans text-black_900 mb-4 sm:mb-8 sm:text-6xl'>Lendários</h1>
       </section>
@@ -82,6 +84,10 @@ async function getPokemonData(): Promise<DataProps[]> {
       };
     })
   );
+
+  setTimeout(() => {
+
+  }, 10000);
 
   return data;
 }
