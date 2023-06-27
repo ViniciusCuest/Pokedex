@@ -11,7 +11,7 @@ type Props = {
   getLayoutSize: Dispatch<SetStateAction<number>>
 }
 
-export function Cards({ name, types, sprites, id, evolve, getLayoutSize }: ResultDataProps & Props): ReactElement {
+export function Cards({ id, name, pokemon_v2_pokemonspecy, pokemon_v2_pokemontypes, getLayoutSize }: ResultDataProps & Props): ReactElement {
   const cardColor: objType = {
     bug: 'bg-gradient-to-b from-max_cyan to-min_cyan',
     grass: 'bg-gradient-to-b from-max_green to-min_green',
@@ -22,6 +22,10 @@ export function Cards({ name, types, sprites, id, evolve, getLayoutSize }: Resul
     normal: 'bg-gradient-to-b from-max_lightblue to-min_lightblue'
   }
 
+  const nextEvolution: any = pokemon_v2_pokemonspecy.pokemon_v2_evolutionchain.pokemon_v2_pokemonspecies.filter(item => item.evolves_from_species_id == id);
+  console.log(nextEvolution[0]?.name);
+  const typeName = pokemon_v2_pokemontypes[0].pokemon_v2_type;
+
   return (
     <section
       onLoad={(e) => {
@@ -30,12 +34,15 @@ export function Cards({ name, types, sprites, id, evolve, getLayoutSize }: Resul
       onResize={(e) => {
         getLayoutSize(e.currentTarget.clientWidth);
       }}
-      className={`relative ${cardColor[types[0].type.name]} w-[calc((100% / 2) - (1.25rem * 2 + 1rem)] shadow-lg h-44 p-2 rounded-lg sm:rounded-lg sm:w-96 sm:h-80 sm:p-6`}>
+      className={`relative ${cardColor[typeName.name]} w-[calc((100% / 2) - (1.25rem * 2 + 1rem)] shadow-lg h-44 p-2 rounded-lg sm:rounded-lg sm:w-96 sm:h-80 sm:p-6`}>
       <button className="absolute top-0 right-0 m-5">
         <AiFillStar className='w-9 h-9 fill-max_orange' />
       </button>
       <span className="flex flex-row justify-items-center items-center">
-        <Avatar src={`${sprites?.other.dream_world.front_default}`} />
+        {
+          //<Avatar src={`${sprites?.other.dream_world.front_default}`} />
+        }
+
         <div
           className="flex flex-col mt-3 ml-1 space-y-1 sm:ml-3">
           <span className='flex items-center justify-center w-16 h-6 mb-1 bg-white font-sans font-bold text-base text-gray_700 rounded-lg'>
@@ -51,22 +58,32 @@ export function Cards({ name, types, sprites, id, evolve, getLayoutSize }: Resul
           <div
             className="flex flex-col space-y-1 sm:grid sm:grid-cols-2 sm:gap-3 sm:space-y-0">
             {
-              types.map(({ type }, _id: number) => (
-                <Badge key={String(_id)} title={type.name} />
+              pokemon_v2_pokemontypes.map(({ pokemon_v2_type }) => (
+                <Badge key={String(pokemon_v2_type.id)} title={pokemon_v2_type.name} />
               ))
             }
           </div>
         </div>
       </span>
       <section className="flex items-center gap-2">
-        <Avatar className='mt-3' src={`${sprites?.front_default}`} type={'small'} />
-        <Avatar className='mt-3' src={`${sprites?.back_default}`} type={'small'} />
-        <Avatar className='mt-3' src={`${sprites?.front_shiny}`} type={'small'} />
-        <Avatar className='mt-3' src={`${sprites?.back_shiny}`} type={'small'} />
+        {
+          //<Avatar className='mt-3' src={`${sprites?.front_default}`} type={'small'} />
+          //<Avatar className='mt-3' src={`${sprites?.back_default}`} type={'small'} />
+          //<Avatar className='mt-3' src={`${sprites?.front_shiny}`} type={'small'} />
+          //<Avatar className='mt-3' src={`${sprites?.back_shiny}`} type={'small'} />
+        }
       </section>
       <span className="flex flex-row space-x-2 mt-4">
         <h3 className='text-xl font-sans font-medium text-white'>Evolução: </h3>
-        <p className="text-xl font-sans font-bold text-white">{evolve.chain.evolves_to[0].species.name[0].toUpperCase() + evolve.chain.evolves_to[0].species.name.substring(1)}</p>
+        {
+          <p
+            className="text-xl font-sans font-bold text-white">
+            {
+              nextEvolution.map(({ name } : any) =>
+                name[0].toUpperCase() + name.substring(1))
+            }
+          </p>
+        }
       </span>
     </section>
   );
