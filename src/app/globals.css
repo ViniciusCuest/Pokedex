@@ -3,14 +3,21 @@
 @tailwind utilities;
 
 body {
-    font-family: 'Nunito';
+  font-family: 'Nunito';
 }
 
-div::-webkit-scrollbar,section::-webkit-scrollbar {
-    display: none;
+body::-webkit-scrollbar,
+html::-webkit-scrollbar {
+  display: none;
 }
 
-div,section {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+div::-webkit-scrollbar,
+section::-webkit-scrollbar {
+  display: none;
+}
+
+div,
+section {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

@@ -10,17 +10,18 @@ type Props = {
 export function Badge({ title }: Props) {
 
    const badgeColor: objType = {
-      bug: 'bg-gradient-to-r from-bug1 to-bug2',
-      grass: 'bg-gradient-to-r from-grass1 to-grass2',
-      fire: 'bg-gradient-to-r from-fire1 to-fire2',
-      poison: 'bg-gradient-to-r from-max_purple to-min_purple',
-      water: 'bg-gradient-to-r from-water1 to-water2',
-      flying: 'bg-gradient-to-r from-max_blue to-min_blue',
-      normal: 'bg-gradient-to-r from-normall to-normal2'
+      bug: 'from-bug1 to-bug2',
+      grass: 'from-grass1 to-grass2',
+      fire: 'from-fire1 to-fire2',
+      poison: 'from-max_purple to-min_purple',
+      water: 'from-water1 to-water2',
+      flying: 'from-max_blue to-min_blue',
+      normal: 'from-normall to-normal2',
+      rock: 'from-max_rock to-min_rock'
    }
 
    return (
-      <div className={`flex justify-center items-center w-14 h-4 rounded-lg ${badgeColor[title]} sm:w-20 sm:h-6`}>
+      <div className={`flex justify-center items-center w-14 h-4 rounded-lg bg-gradient-to-r ${badgeColor[title]} sm:w-20 sm:h-6`}>
          <h1 className='text-[.75rem] font-sans font-bold text-white sm:text-sm'>
             {
                title[0].toUpperCase() + title.substring(1)

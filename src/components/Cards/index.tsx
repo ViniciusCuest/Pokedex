@@ -14,19 +14,25 @@ type Props = {
 
 export function Cards({ id, name, pokemon_v2_pokemonspecy, pokemon_v2_pokemonsprites, pokemon_v2_pokemontypes, isLegendary, getLayoutSize }: ResultDataProps & Props): ReactElement {
   const cardColor: objType = {
-    bug: 'bg-gradient-to-b from-max_cyan to-min_cyan',
-    grass: 'bg-gradient-to-b from-max_green to-min_green',
-    fire: 'bg-gradient-to-b from-max_orange to-min_orange',
-    poison: 'bg-gradient-to-b from-max_purple to-min_purple',
-    water: 'bg-gradient-to-b from-max_blue to-min_blue',
-    flying: 'bg-gradient-to-b from-max_blue to-min_blue',
-    normal: 'bg-gradient-to-b from-max_lightblue to-min_lightblue'
+    bug: 'from-max_cyan to-min_cyan',
+    grass: 'from-max_green to-min_green',
+    fire: 'from-max_orange to-min_orange',
+    poison: 'from-max_purple to-min_purple',
+    water: 'from-max_blue to-min_blue',
+    flying: 'from-max_blue to-min_blue',
+    normal: 'from-max_lightblue to-min_lightblue',
+    ice: 'from-max_ice to-min_ice',
+    steel: 'from-max_steel to-min_steel',
+    rock: 'from-max_rock to-min_rock',
+    electric: 'from-max_eletric to-min_eletric',
+    ground: 'from-max_ground to-min_ground',
+    fairy: 'from-max_fairy to-min_fairy',
+    ghost: 'from-max_ghost to-min_ghost',
+    fighting: 'from-max_fighting to-min_fighting'
   }
 
   const image = JSON.parse(pokemon_v2_pokemonsprites[0]?.sprites);
-
   const evolvesTo = pokemon_v2_pokemonspecy?.pokemon_v2_evolutionchain.pokemon_v2_pokemonspecies.find(item => item.evolves_from_species_id == id);
-
   const type = pokemon_v2_pokemontypes[0]?.pokemon_v2_type.name;
 
   return (
@@ -37,7 +43,7 @@ export function Cards({ id, name, pokemon_v2_pokemonspecy, pokemon_v2_pokemonspr
       onResize={(e) => {
         getLayoutSize(e.currentTarget.clientWidth);
       }}
-      className={!isLegendary ? `relative ${cardColor[type]} w-[calc((100% / 2) - (1.25rem * 2 + 1rem)] shadow-lg h-44 p-2 rounded-lg sm:rounded-lg sm:w-96 sm:h-80 sm:p-6` : ``}>
+      className={`relative bg-gradient-to-b ${cardColor[type]} shadow-lg ${!!isLegendary ? 'w-[36rem] h-[21rem]' : 'w-[calc((100% / 2) - (1.25rem * 2 + 1rem)] h-44 sm:w-96 sm:h-80'}  p-2 rounded-lg sm:rounded-lg sm:p-6`}>
       <button className="absolute top-0 right-0 m-5">
         <AiFillStar className='w-9 h-9 fill-max_orange' />
       </button>

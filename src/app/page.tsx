@@ -4,6 +4,7 @@ import { registerApolloClient } from "@apollo/experimental-nextjs-app-support/rs
 import { Header } from '@/components/Header';
 import { ScrollContainer } from '@/components/ScrollContainer';
 import { DataProps } from '@/types/api.types';
+import { Cards } from "@/components/Cards";
 
 const query = gql`{
   poke: pokemon_v2_pokemon(limit: 100) {
@@ -41,10 +42,24 @@ const query = gql`{
     weight
     height
     pokemon_species_id
+    pokemon_v2_pokemontypes {
+      pokemon_v2_type {
+        name
+        id
+      }
+    }
     pokemon_v2_pokemonspecy {
       is_legendary
       is_mythical
       is_baby
+      pokemon_v2_evolutionchain {
+        id
+        pokemon_v2_pokemonspecies {
+          evolves_from_species_id
+          name
+          id
+        }
+      }
     }
     pokemon_v2_pokemonsprites {
       sprites
@@ -63,19 +78,32 @@ export const { getClient } = registerApolloClient(() => {
     })
   })
 });
+
 export default async function Home() {
   const { data }: DataProps[] | any = await getClient().query({
     query
   });
   return (
-    <section className='overflow-x-hidden'>
+    <main className='overflow-x-hidden'>
       <Header />
-      <ScrollContainer data={data.poke} />
-
-      <section className='mt-24 px-5 sm:pt-20 sm:pl-14 sm:pr-10'>
-        <h1 className='text-3xl font-bold font-sans text-black_900 mb-4 sm:mb-8 sm:text-6xl'>Lendários</h1>
+      <ScrollContainer
+        data={data.poke}
+        title="Favoritos"
+      />
+      <ScrollContainer
+        data={data.legendary}
+        title="Lendários"
+        legendary
+      />
+      <section>
+        <div className='grid grid-cols-5'>
+          {
+            data.poke.map((item) => (
+              <Cards isLegendary={false} {...item} />
+            ))
+          }
+        </div>
       </section>
-      <ScrollContainer data={data.legendary} />
-    </section>
+    </main>
   );
 }

@@ -39,7 +39,7 @@ export function Pokedex({ search, changeScrollPosition }: Props) {
           </form>
         </div>
       </div>
-      <span className="blur-[48px] top-0 mt-52 right-0 mr-80 absolute w-60 h-[560px] z-0 bg-background" />
+      <span className="blur-[48px] top-0 mt-60 right-0 mr-80 absolute w-60 h-[460px] z-0 bg-background" />
     </>
   );
 }

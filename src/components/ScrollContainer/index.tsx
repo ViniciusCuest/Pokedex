@@ -4,7 +4,12 @@ import { Cards } from "../Cards";
 import { DataProps, ResultDataProps } from "@/types/api.types";
 import { Pokedex } from "../Pokedex";
 
-export function ScrollContainer({ data }: DataProps) {
+type Props = {
+  legendary?: boolean;
+  title: string;
+}
+
+export function ScrollContainer({ data, legendary = false, title }: DataProps & Props) {
   const scrollComponentRef = useRef<HTMLDivElement>(null);
 
   const cardsGap: number = 44; //2.75rem + 10px
@@ -33,7 +38,9 @@ export function ScrollContainer({ data }: DataProps) {
   return (
     <section>
       <h1 className='text-3xl font-bold font-sans mt-12 ml-4 text-black_900 mb-4 sm:mb-8 sm:text-6xl sm:absolute sm:ml-10 sm:mt-4'>
-        Favoritos
+        {
+          title
+        }
       </h1>
       <section
         ref={scrollComponentRef}
@@ -44,14 +51,19 @@ export function ScrollContainer({ data }: DataProps) {
             data?.filter((item: ResultDataProps) => String(item.id) === search ||
               item.name.toLowerCase().includes(search.toLowerCase())).map((item: ResultDataProps) => {
                 return (
-                  <Cards getLayoutSize={setCurrentCardWidth} key={String(item.id)} {...item} />
+                  <Cards
+                    getLayoutSize={setCurrentCardWidth}
+                    isLegendary={legendary}
+                    key={String(item.id)}
+                    {...item}
+                  />
                 )
               })
           }
         </div>
       </section>
       {
-        (width > 640) &&
+        (width > 640 && !legendary) &&
         <Pokedex
           changeScrollPosition={handleChangeAppearingList}
           search={setSearch}
