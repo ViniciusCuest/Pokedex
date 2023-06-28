@@ -2,7 +2,7 @@ import './globals.css'
 import { Nunito } from 'next/font/google';
 import Loading from './loading';
 import { Suspense } from 'react';
-import Head from 'next/head';
+import { ApolloWrapper } from '@/lib/apollo-provider';
 
 const nunito = Nunito({
   subsets: ['latin'],
@@ -24,10 +24,13 @@ export default function RootLayout({
     <html lang="en" className={`${nunito.variable}`}>
       <body className='bg-background'>
         <Suspense fallback={<Loading />}>
-          {
-            children
-          }
+          <ApolloWrapper>
+            {
+              children
+            }
+          </ApolloWrapper>
         </Suspense>
+
       </body>
     </html>
   )

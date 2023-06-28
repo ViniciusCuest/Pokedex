@@ -9,7 +9,7 @@ type Props = {
   title: string;
 }
 
-export function ScrollContainer({ data, legendary = false, title }: DataProps & Props) {
+export function VerticalContainer({ data, legendary = false, title }: DataProps & Props) {
   const scrollComponentRef = useRef<HTMLDivElement>(null);
 
   const cardsGap: number = 44; //2.75rem + 10px
@@ -53,8 +53,8 @@ export function ScrollContainer({ data, legendary = false, title }: DataProps & 
                 return (
                   <Cards
                     getLayoutSize={setCurrentCardWidth}
-                    isLegendary={legendary}
                     key={String(item.id)}
+                    size={legendary ? 'large' : 'medium'}
                     {...item}
                   />
                 )

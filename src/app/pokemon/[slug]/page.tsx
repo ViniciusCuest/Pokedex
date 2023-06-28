@@ -1,9 +1,12 @@
-import RootLayout from "@/app/layout";
+interface Props {
+  params: {
+    slug: string;
+  }
+}
 
-export default function Pokemon({ params }) {
+export default async function Pokemon({ params }: Props) {
+  await new Promise((resolve) => setTimeout(resolve, 5000))
   return (
-    <RootLayout>
-      <h1>{params.slug}</h1>
-    </RootLayout>
+    <h1>{params.slug}</h1>
   );
 }

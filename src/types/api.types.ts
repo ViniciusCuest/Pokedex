@@ -28,10 +28,5 @@ export type ResultDataProps = {
 }
 
 export type DataProps = {
-  data: {
-    poke: ResultDataProps[];
-    legendary: {
-      data: any
-    }
-  }
+  data: ResultDataProps[];
 }

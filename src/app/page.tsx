@@ -1,13 +1,14 @@
-import { ApolloClient, HttpLink, InMemoryCache, gql } from "@apollo/client";
+import { ApolloClient, ApolloProvider, HttpLink, InMemoryCache, gql } from "@apollo/client";
 import { registerApolloClient } from "@apollo/experimental-nextjs-app-support/rsc";
 
 import { Header } from '@/components/Header';
-import { ScrollContainer } from '@/components/ScrollContainer';
+import { VerticalContainer } from '@/components/VerticalContainer';
 import { DataProps } from '@/types/api.types';
 import { Cards } from "@/components/Cards";
+import { AllPokemons } from "@/components/AllPokemons";
 
 const query = gql`{
-  poke: pokemon_v2_pokemon(limit: 100) {
+  poke: pokemon_v2_pokemon(limit: 100, where: {pokemon_v2_pokemonspecy: {pokemon_v2_generation: {id: {_eq: 2}}}}) {
     id
     name
     height
@@ -69,7 +70,6 @@ const query = gql`{
   }
 }
 `;
-
 export const { getClient } = registerApolloClient(() => {
   return new ApolloClient({
     cache: new InMemoryCache(),
@@ -83,26 +83,21 @@ export default async function Home() {
   const { data }: DataProps[] | any = await getClient().query({
     query
   });
+  await new Promise((resolve) => setTimeout(resolve, 5000));
   return (
     <main className='overflow-x-hidden'>
       <Header />
-      <ScrollContainer
+      <VerticalContainer
         data={data.poke}
         title="Favoritos"
       />
-      <ScrollContainer
+      <VerticalContainer
         data={data.legendary}
         title="Lendários"
         legendary
       />
-      <section>
-        <div className='grid grid-cols-5'>
-          {
-            data.poke.map((item) => (
-              <Cards isLegendary={false} {...item} />
-            ))
-          }
-        </div>
+      <section className="relative pt-3 px-5 sm:py-8 sm:mt-8 sm:pl-14">
+        <AllPokemons data={data.poke} />
       </section>
     </main>
   );
