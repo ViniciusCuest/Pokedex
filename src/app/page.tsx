@@ -6,37 +6,10 @@ import { VerticalContainer } from '@/components/VerticalContainer';
 import { DataProps } from '@/types/api.types';
 import { Cards } from "@/components/Cards";
 import { AllPokemons } from "@/components/AllPokemons";
+import { Favorites } from "@/components/Favorites";
+import { Legendary } from "@/components/Legendary";
 
 const query = gql`{
-  poke: pokemon_v2_pokemon(limit: 100, where: {pokemon_v2_pokemonspecy: {pokemon_v2_generation: {id: {_eq: 2}}}}) {
-    id
-    name
-    height
-    weight
-    pokemon_v2_pokemontypes {
-      pokemon_v2_type {
-        name
-        id
-      }
-    }
-    pokemon_v2_pokemonspecy {
-      is_legendary
-      is_mythical
-      is_baby
-      pokemon_v2_evolutionchain {
-        id
-        pokemon_v2_pokemonspecies {
-          evolves_from_species_id
-          name
-          id
-        }
-      }
-    }
-    pokemon_v2_pokemonsprites {
-      id
-      sprites
-    }
-  }
   legendary: pokemon_v2_pokemon(limit: 20 where: {pokemon_v2_pokemonspecy: {is_legendary: {_eq: true}}}) {
     id
     name
@@ -53,6 +26,10 @@ const query = gql`{
       is_legendary
       is_mythical
       is_baby
+      pokemon_v2_generation {
+        id
+        name
+      }
       pokemon_v2_evolutionchain {
         id
         pokemon_v2_pokemonspecies {
@@ -70,6 +47,7 @@ const query = gql`{
   }
 }
 `;
+
 export const { getClient } = registerApolloClient(() => {
   return new ApolloClient({
     cache: new InMemoryCache(),
@@ -83,14 +61,11 @@ export default async function Home() {
   const { data }: DataProps[] | any = await getClient().query({
     query
   });
-  await new Promise((resolve) => setTimeout(resolve, 5000));
   return (
     <main className='overflow-x-hidden'>
       <Header />
-      <VerticalContainer
-        data={data.poke}
-        title="Favoritos"
-      />
+      <Favorites />
+      <Legendary />
       <VerticalContainer
         data={data.legendary}
         title="Lendários"

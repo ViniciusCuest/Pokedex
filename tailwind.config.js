@@ -61,7 +61,9 @@ module.exports = {
       max_ghost: '#575479',
       min_ghost: '#7171A0',
       max_fighting: '#E0C6AB',
-      min_fighting: '#ECD2B7'
+      min_fighting: '#ECD2B7',
+      max_dark: '#252431',
+      min_dark: '#343153'
     }
   },
   plugins: [],

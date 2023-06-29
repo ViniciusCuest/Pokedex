@@ -9,11 +9,22 @@ import Link from "next/link";
 
 type Props = {
   size?: 'small' | 'medium' | 'large';
+  favorite: (key: number, generation: number) => void;
   isFavorite?: boolean
   getLayoutSize?: Dispatch<SetStateAction<number>>;
 }
 
-export function Cards({ id, name, pokemon_v2_pokemonspecy, pokemon_v2_pokemonsprites, pokemon_v2_pokemontypes, size = 'medium', isFavorite = false, getLayoutSize }: ResultDataProps & Props): ReactElement {
+export function Cards({
+  id,
+  name,
+  pokemon_v2_pokemonspecy,
+  pokemon_v2_pokemonsprites,
+  pokemon_v2_pokemontypes,
+  size = 'medium',
+  isFavorite = false,
+  favorite,
+  getLayoutSize
+}: ResultDataProps & Props): ReactElement {
 
   const cardColor: objType = {
     bug: 'from-max_cyan to-min_cyan',
@@ -30,7 +41,8 @@ export function Cards({ id, name, pokemon_v2_pokemonspecy, pokemon_v2_pokemonspr
     ground: 'from-max_ground to-min_ground',
     fairy: 'from-max_fairy to-min_fairy',
     ghost: 'from-max_ghost to-min_ghost',
-    fighting: 'from-max_fighting to-min_fighting'
+    fighting: 'from-max_fighting to-min_fighting',
+    dark: 'from-max_dark to-min_dark'
   }
 
   const cardSize: string = size === 'small' ?
@@ -55,7 +67,13 @@ export function Cards({ id, name, pokemon_v2_pokemonspecy, pokemon_v2_pokemonspr
       }}
       className={`relative transition-all hover:scale-[1.05] bg-gradient-to-b ${cardColor[type]} shadow-lg  cursor-pointer p-2 rounded-lg ${cardSize} sm:rounded-lg sm:p-6`}
     >
-      <button className="absolute top-0 right-0 m-5">
+      <button
+        className="absolute top-0 right-0 m-5"
+        onClick={(e) => {
+          e.preventDefault();
+          favorite(id, pokemon_v2_pokemonspecy.pokemon_v2_generation.id);
+        }}
+      >
         {
           isFavorite ?
             <AiFillStar className='w-9 h-9 fill-max_orange' />

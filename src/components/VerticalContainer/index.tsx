@@ -14,8 +14,10 @@ export function VerticalContainer({ data, legendary = false, title }: DataProps 
 
   const cardsGap: number = 44; //2.75rem + 10px
 
-  const [width, setWidth] = useState<number>(0);
   const [search, setSearch] = useState<string>('');
+
+  const [favorites, setFavorites] = useState<any>([]);
+  const [_data, setData] = useState(data);
 
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [currentCardWidth, setCurrentCardWidth] = useState<number>(0);
@@ -29,10 +31,21 @@ export function VerticalContainer({ data, legendary = false, title }: DataProps 
     setCurrentIndex(toIndex);
   }
 
-  useEffect(() => {
-    const winWidth = window.screen;
-    setWidth(winWidth.width);
-  }, []);
+  const handleFavoriteCard = (id: number) => {
+    window.localStorage.setItem('@POKEDEX:FAVORITES',
+      JSON.stringify([
+        ...favorites, {
+          pokemonId: id,
+        }
+      ]));
+
+    setFavorites((prev: any) => [
+      ...prev, {
+        pokemonId: id,
+      }]);
+
+  }
+
 
   //.filter((i, index) => { return index >= data.length - 10 }).reverse()
   return (
@@ -48,12 +61,14 @@ export function VerticalContainer({ data, legendary = false, title }: DataProps 
         <div
           className='grid w-auto gap-4 gap-x-4 grid-cols-2 sm:flex sm:flex-row sm:gap-x-11 sm:min-w-fit sm:p-5 sm:ml-[-.9rem]'>
           {
-            data?.filter((item: ResultDataProps) => String(item.id) === search ||
+            _data?.filter((item: ResultDataProps) => String(item.id) === search ||
               item.name.toLowerCase().includes(search.toLowerCase())).map((item: ResultDataProps) => {
                 return (
                   <Cards
                     getLayoutSize={setCurrentCardWidth}
                     key={String(item.id)}
+                    isFavorite={false}
+                    favorite={handleFavoriteCard}
                     size={legendary ? 'large' : 'medium'}
                     {...item}
                   />
@@ -63,7 +78,7 @@ export function VerticalContainer({ data, legendary = false, title }: DataProps 
         </div>
       </section>
       {
-        (width > 640 && !legendary) &&
+        (!legendary) &&
         <Pokedex
           changeScrollPosition={handleChangeAppearingList}
           search={setSearch}

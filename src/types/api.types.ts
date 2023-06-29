@@ -12,6 +12,10 @@ export type ResultDataProps = {
   pokemon_v2_pokemonspecy: {
     is_legendary: boolean;
     is_mythical: boolean;
+    pokemon_v2_generation: {
+      name: string;
+      id: number;
+    }
     pokemon_v2_evolutionchain: {
       pokemon_v2_pokemonspecies: [{
         evolves_from_species_id: number | null;
