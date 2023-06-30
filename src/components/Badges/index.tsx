@@ -1,7 +1,7 @@
 'use client';
 
-import { objType } from "@/types/color.props";
-import { useEffect } from "react";
+import { objType } from '@/types/color.props';
+import { useEffect } from 'react';
 
 type Props = {
    title: string;

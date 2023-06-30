@@ -4,23 +4,23 @@ import {
   ApolloLink,
   HttpLink,
   SuspenseCache,
-} from "@apollo/client";
+} from '@apollo/client';
 import {
   ApolloNextAppProvider,
   NextSSRInMemoryCache,
   SSRMultipartLink,
   NextSSRApolloClient
-} from "@apollo/experimental-nextjs-app-support/ssr";
-import { ReactElement } from "react";
+} from '@apollo/experimental-nextjs-app-support/ssr';
+import { ReactElement } from 'react';
 
 function makeClient() {
   const httpLink = new HttpLink({
-    uri: "https://beta.pokeapi.co/graphql/v1beta",
+    uri: 'https://beta.pokeapi.co/graphql/v1beta',
   });
 
   return new NextSSRApolloClient({
     cache: new NextSSRInMemoryCache(),
-    link: typeof window === "undefined" ?
+    link: typeof window === 'undefined' ?
       ApolloLink.from([
         new SSRMultipartLink({
           stripDefer: true,

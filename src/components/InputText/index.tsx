@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react"
+import { Dispatch, SetStateAction } from 'react'
 
 type Props = {
   changeValue: Dispatch<SetStateAction<string>>;
@@ -14,10 +14,10 @@ export function InputText({ changeValue, id } : Props) {
         Nome ou Número
       </label>
       <input
-        type="text"
+        type='text'
         onChange={(e) => { changeValue(e.target.value) }}
         id={id}
-        placeholder="#"
+        placeholder='#'
         className='bg-background outline-none w-full h-12 font-sans font-medium text-lg rounded-lg shadow-lg px-2'
       />
     </div>

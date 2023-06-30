@@ -22,8 +22,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${nunito.variable}`}>
-      <body className='bg-background'>
+    <html lang='en' className={`${nunito.variable}`}>
+      <body>
         <Suspense fallback={<Loading />}>
           <ApolloWrapper>
             <SavedDataProvider>

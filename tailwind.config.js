@@ -10,9 +10,19 @@ module.exports = {
       fontFamily: {
         sans: ['var(--font-nunito)'],
       },
-      boxShadow: {
-        '3xl': '2px 2px 48px 2px rgba(0, 0, 0, 0.25)'
-      }
+      gridTemplateAreas: {
+        'wide': [
+          'header header header',
+          'nav    main   main',
+          'nav    footer footer',
+        ],
+        'slim': [
+          'header',
+          'nav',
+          'main',
+          'footer',
+        ],
+      },
     },
     colors: {
       background: '#E8E8E8',
@@ -66,6 +76,11 @@ module.exports = {
       min_dark: '#343153'
     }
   },
-  plugins: [],
+  plugins: [
+    require('@savvywombat/tailwindcss-grid-areas'),
+  ],
+  variants: {
+    gridTemplateAreas: ['responsive']
+  }
 }
 //d58103

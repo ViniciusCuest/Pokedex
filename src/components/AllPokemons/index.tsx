@@ -1,9 +1,9 @@
 'use client';
-import { DataProps, ResultDataProps } from "@/types/api.types";
-import { Cards } from "../Cards";
-import { useEffect, useState } from "react";
-import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
-import { ApolloQueryResult, OperationVariables, gql } from "@apollo/client";
+import { DataProps, ResultDataProps } from '@/types/api.types';
+import { Cards } from '../Cards';
+import { useEffect, useState } from 'react';
+import { useSuspenseQuery } from '@apollo/experimental-nextjs-app-support/ssr';
+import { ApolloQueryResult, OperationVariables, gql } from '@apollo/client';
 export function AllPokemons(prop: DataProps) {
 
   const [generationId, setGenerationId] = useState(1);
@@ -56,13 +56,13 @@ export function AllPokemons(prop: DataProps) {
   return (
     <>
       <h1
-        className="text-3xl font-bold font-sans mt-12 ml-4 text-black_900 mb-4 sm:mb-8 sm:text-6xl sm:mt-4"
+        className='text-3xl font-bold font-sans mt-12 ml-4 text-black_900 mb-4 sm:mb-8 sm:text-6xl sm:mt-4'
       >
         Todos
       </h1>
       <select
-        name=""
-        id=""
+        name=''
+        id=''
         onChange={(evt) => {
           evt.preventDefault();
           if (generationId === Number(evt.target.value))
@@ -71,8 +71,8 @@ export function AllPokemons(prop: DataProps) {
           setGenerationId(Number(evt.target.value));
         }}
       >
-        <option value="1">1</option>
-        <option value="2">2</option>
+        <option value='1'>1</option>
+        <option value='2'>2</option>
       </select>
       <div className='grid grid-cols-5 gap-y-8'>
         {
@@ -80,7 +80,7 @@ export function AllPokemons(prop: DataProps) {
             return (
               <Cards
                 key={item.id}
-                size="small"
+                size='small'
                 {...item}
               />
             )

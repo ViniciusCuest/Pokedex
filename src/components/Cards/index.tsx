@@ -1,11 +1,11 @@
 'use client';
-import { ResultDataProps } from "@/types/api.types";
-import { Avatar } from "../Avatars";
-import { Badge } from "../Badges";
-import { objType } from "@/types/color.props";
-import { ClassAttributes, Dispatch, HTMLAttributes, ReactElement, SetStateAction, useEffect, useState } from "react";
+import { ResultDataProps } from '@/types/api.types';
+import { Avatar } from '../Avatars';
+import { Badge } from '../Badges';
+import { objType } from '@/types/color.props';
+import { ClassAttributes, Dispatch, HTMLAttributes, ReactElement, SetStateAction, useEffect, useState } from 'react';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
-import Link from "next/link";
+import Link from 'next/link';
 
 type Props = {
   size?: 'small' | 'medium' | 'large';
@@ -68,7 +68,7 @@ export function Cards({
       className={`relative transition-all hover:scale-[1.05] bg-gradient-to-b ${cardColor[type]} shadow-lg  cursor-pointer p-2 rounded-lg ${cardSize} sm:rounded-lg sm:p-6`}
     >
       <button
-        className="absolute top-0 right-0 m-5"
+        className='absolute top-0 right-0 m-5'
         onClick={(e) => {
           e.preventDefault();
           favorite(id, pokemon_v2_pokemonspecy.pokemon_v2_generation.id);
@@ -80,16 +80,14 @@ export function Cards({
             :
             <AiOutlineStar className='w-9 h-9 fill-white' />
         }
-
       </button>
       <Link href={`/pokemon/${id}`}>
-        <span className="flex flex-row justify-items-center items-center">
-          {
-            <Avatar src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/${String(image?.other.dream_world.front_default).slice(6)}`} />
-          }
-
+        <span className='flex flex-row justify-items-center items-center'>
+          <Avatar
+            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/${String(image?.other.dream_world.front_default).slice(6)}`}
+          />
           <div
-            className="flex flex-col mt-7 sm:mt-3 ml-1 space-y-1 sm:ml-3">
+            className='flex flex-col mt-7 sm:mt-3 ml-1 space-y-1 sm:ml-3'>
             <span className='flex items-center justify-center w-16 h-[1.1rem] rounded-md sm:h-6 mb-1 bg-white font-sans font-bold text-[.75rem] sm:text-base text-gray_700 sm:rounded-lg'>
               #{
                 id
@@ -101,7 +99,7 @@ export function Cards({
               }
             </h1>
             <div
-              className="flex flex-col space-y-1 sm:grid sm:grid-cols-2 sm:gap-3 sm:space-y-0">
+              className='flex flex-col space-y-1 sm:grid sm:grid-cols-2 sm:gap-3 sm:space-y-0'>
               {
                 pokemon_v2_pokemontypes.map(({ pokemon_v2_type }) => (
                   <Badge key={String(pokemon_v2_type.id)} title={pokemon_v2_type.name} />
@@ -136,10 +134,10 @@ export function Cards({
           />
         </section>
       }
-      <span className="flex flex-row space-x-2 mt-4">
+      <span className='flex flex-row space-x-2 mt-4'>
 
         <h3 className='text-xl font-sans font-medium text-white'>Evolução: </h3>
-        <p className="text-xl font-sans font-bold text-white">
+        <p className='text-xl font-sans font-bold text-white'>
           {
             !evolvesTo?.name ?
               'Não há evolução'

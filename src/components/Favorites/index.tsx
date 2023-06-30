@@ -1,9 +1,9 @@
 'use client';
 
-import { useLocalData } from "@/context/local-provider";
-import { gql, useSuspenseQuery } from "@apollo/client";
-import { useEffect } from "react";
-import { VerticalContainer } from "../VerticalContainer";
+import { useLocalData } from '@/context/local-provider';
+import { gql, useSuspenseQuery } from '@apollo/client';
+import { useEffect } from 'react';
+import { VerticalContainer } from '../VerticalContainer';
 
 
 export function Favorites() {

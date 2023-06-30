@@ -1,6 +1,6 @@
 'use client';
 import Image from 'next/legacy/image';
-import { ClassAttributes, useEffect } from "react";
+import { ClassAttributes, useEffect } from 'react';
 
 interface Props {
   src: string;
@@ -27,7 +27,7 @@ export function Avatar({ src, type = 'default', alt, className }: Props) {
         className={`relative sm:flex items-center justify-center bg-gray_500 rounded-2xl border-4 border-white sm:h-20 sm:w-20 ${className}`}
       >
         < Image
-          alt="pokemon-image"
+          alt='pokemon-image'
           src={src}
           layout='fill'
         />

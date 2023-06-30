@@ -1,8 +1,8 @@
 'use client'
-import { useRef, useState, useEffect } from "react";
-import { Cards } from "../Cards";
-import { DataProps, ResultDataProps } from "@/types/api.types";
-import { Pokedex } from "../Pokedex";
+import { useRef, useState, useEffect } from 'react';
+import { Cards } from '../Cards';
+import { DataProps, ResultDataProps } from '@/types/api.types';
+import { Pokedex } from '../Pokedex';
 
 type Props = {
   legendary?: boolean;
