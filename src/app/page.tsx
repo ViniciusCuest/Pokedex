@@ -54,7 +54,7 @@ export default async function Home() {
     query
   });
   return (
-    <main className='overflow-x-hidden'>
+    <main className='overflow-x-hidden bg-background'>
       <Header />
       <Favorites />
       <Legendary />

@@ -16,7 +16,6 @@ export function SavedDataProvider({ children }: Props): ReactElement {
   const [favoritesId, setFavoritesId] = useState([1]);
   useEffect(() => {
     const favoritesExist: string | null = window.localStorage.getItem('@POKEDEX:favorites');
-    console.log('nada', favoritesExist);
     if (!favoritesExist)
       return;
     setFavoritesId(JSON.parse(favoritesExist));

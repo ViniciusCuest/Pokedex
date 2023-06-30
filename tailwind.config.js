@@ -12,16 +12,16 @@ module.exports = {
       },
       gridTemplateAreas: {
         'wide': [
-          'header header header',
-          'nav    main   main',
-          'nav    footer footer',
+          'stats cover family',
         ],
         'slim': [
-          'header',
-          'nav',
-          'main',
-          'footer',
+          'cover',
+          'stats',
+          'family',
         ],
+      },
+      gridTemplateColumns: {
+        'layout': '1fr 1fr 1fr',
       },
     },
     colors: {
