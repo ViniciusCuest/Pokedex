@@ -9,9 +9,10 @@ import Link from 'next/link';
 
 type Props = {
   size?: 'small' | 'medium' | 'large';
-  favorite: (key: number, generation: number) => void;
   isFavorite?: boolean
   getLayoutSize?: Dispatch<SetStateAction<number>>;
+  favorite: (key: number, generation: number) => void;
+  unfavorite: (key: number) => void;
 }
 
 export function Cards({
@@ -23,6 +24,7 @@ export function Cards({
   size = 'medium',
   isFavorite = false,
   favorite,
+  unfavorite,
   getLayoutSize
 }: ResultDataProps & Props): ReactElement {
 
@@ -71,8 +73,13 @@ export function Cards({
         className='absolute top-0 right-0 m-5'
         onClick={(e) => {
           e.preventDefault();
-          favorite(id, pokemon_v2_pokemonspecy.pokemon_v2_generation.id);
+          if (!isFavorite) {
+            favorite(id, pokemon_v2_pokemonspecy.pokemon_v2_generation.id);
+            return;
+          }
+          unfavorite(id);
         }}
+
       >
         {
           isFavorite ?

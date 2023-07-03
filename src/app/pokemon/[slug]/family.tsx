@@ -1,17 +1,18 @@
 'use client';
 import { Avatar } from '@/components/Avatars';
 import Image from 'next/legacy/image';
-import { useEffect, useState } from 'react';
-export function Family({ data, image }) {
+import React, { useEffect, useState } from 'react';
+
+export function Family({ data, image }: any) {
   const family: [] = data.pokemon_v2_pokemon_by_pk.pokemon_v2_pokemonspecy.pokemon_v2_evolutionchain.pokemon_v2_pokemonspecies;
 
   return (
     <div className='relative flex flex-row items-center justify-around px-4 py-3 rounded-xl sm:flex-col sm:w-11'>
-      { 
+      {
         family.map((item: any) => {
           const itemImage = JSON.parse(item.pokemon_v2_pokemons[0].pokemon_v2_pokemonsprites[0].sprites);
           return (
-            <figure 
+            <figure
               key={String(item.id)}
               className={'relative w-20 h-24'}
             >

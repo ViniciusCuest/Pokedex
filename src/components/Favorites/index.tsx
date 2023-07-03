@@ -2,7 +2,7 @@
 
 import { useLocalData } from '@/context/local-provider';
 import { gql, useSuspenseQuery } from '@apollo/client';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { VerticalContainer } from '../VerticalContainer';
 
 
@@ -47,11 +47,9 @@ export function Favorites() {
     }
   });
 
-  useEffect(() => {
-    console.log(data);
-  }, []);
   return (
     <VerticalContainer
+      title='Favorites'
       data={data.favorites}
     />
   );

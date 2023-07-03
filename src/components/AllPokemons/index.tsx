@@ -4,7 +4,10 @@ import { Cards } from '../Cards';
 import { useEffect, useState } from 'react';
 import { useSuspenseQuery } from '@apollo/experimental-nextjs-app-support/ssr';
 import { ApolloQueryResult, OperationVariables, gql } from '@apollo/client';
+import { useLocalData } from '@/context/local-provider';
 export function AllPokemons(prop: DataProps) {
+
+  const { handleFavoriteCard, favorites } = useLocalData();
 
   const [generationId, setGenerationId] = useState(1);
 
@@ -47,11 +50,13 @@ export function AllPokemons(prop: DataProps) {
     }
   });
 
-  useEffect(() => {
-    console.log(generationId);
-    refetch()
-  }, [generationId]);
 
+  useEffect(() => {
+    refetch({
+      variable: generationId
+    });
+
+  }, [generationId]);
 
   return (
     <>
@@ -76,11 +81,12 @@ export function AllPokemons(prop: DataProps) {
       </select>
       <div className='grid grid-cols-5 gap-y-8'>
         {
-          data?.poke?.map((item: ResultDataProps) => {
+          data?.poke?.filter((item: any) => !favorites.includes(item.id)).map((item: ResultDataProps) => {
             return (
               <Cards
                 key={item.id}
                 size='small'
+                favorite={handleFavoriteCard}
                 {...item}
               />
             )

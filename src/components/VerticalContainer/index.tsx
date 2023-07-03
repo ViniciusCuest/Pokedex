@@ -1,23 +1,26 @@
 'use client'
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, ReactElement } from 'react';
 import { Cards } from '../Cards';
 import { DataProps, ResultDataProps } from '@/types/api.types';
 import { Pokedex } from '../Pokedex';
+import { useLocalData } from '@/context/local-provider';
 
 type Props = {
   legendary?: boolean;
   title: string;
 }
 
-export function VerticalContainer({ data, legendary = false, title }: DataProps & Props) {
+export function VerticalContainer({ data, legendary = false, title }: DataProps & Props): ReactElement {
+
+  const { favorites, handleFavoriteCard, handleUnfavouriteCard } = useLocalData();
+
   const scrollComponentRef = useRef<HTMLDivElement>(null);
 
   const cardsGap: number = 44; //2.75rem + 10px
 
   const [search, setSearch] = useState<string>('');
 
-  const [favorites, setFavorites] = useState<any>([]);
-  const [_data, setData] = useState(data);
+  // const [_data, setData] = useState([...data]);
 
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [currentCardWidth, setCurrentCardWidth] = useState<number>(0);
@@ -30,22 +33,6 @@ export function VerticalContainer({ data, legendary = false, title }: DataProps 
     });
     setCurrentIndex(toIndex);
   }
-
-  const handleFavoriteCard = (id: number) => {
-    window.localStorage.setItem('@POKEDEX:FAVORITES',
-      JSON.stringify([
-        ...favorites, {
-          pokemonId: id,
-        }
-      ]));
-
-    setFavorites((prev: any) => [
-      ...prev, {
-        pokemonId: id,
-      }]);
-
-  }
-
 
   //.filter((i, index) => { return index >= data.length - 10 }).reverse()
   return (
@@ -61,13 +48,14 @@ export function VerticalContainer({ data, legendary = false, title }: DataProps 
         <div
           className='grid w-auto gap-4 gap-x-4 grid-cols-2 sm:flex sm:flex-row sm:gap-x-11 sm:min-w-fit sm:p-5 sm:ml-[-.9rem]'>
           {
-            _data?.filter((item: ResultDataProps) => String(item.id) === search ||
+            data?.filter((item: ResultDataProps) => String(item.id) === search ||
               item.name.toLowerCase().includes(search.toLowerCase())).map((item: ResultDataProps) => {
                 return (
                   <Cards
                     getLayoutSize={setCurrentCardWidth}
                     key={String(item.id)}
-                    isFavorite={false}
+                    isFavorite={favorites.includes(item.id)}
+                    unfavorite={handleUnfavouriteCard}
                     favorite={handleFavoriteCard}
                     size={legendary ? 'large' : 'medium'}
                     {...item}
