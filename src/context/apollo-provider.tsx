@@ -16,6 +16,9 @@ import { ReactElement } from 'react';
 function makeClient() {
   const httpLink = new HttpLink({
     uri: 'https://beta.pokeapi.co/graphql/v1beta',
+    fetchOptions: {
+      cache: 'force-cache'
+    }
   });
 
   return new NextSSRApolloClient({

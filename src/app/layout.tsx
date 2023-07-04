@@ -1,17 +1,10 @@
+'use client'
 import '../styles/globals.css'
 import { Nunito } from 'next/font/google';
 import Loading from './loading';
 import { Suspense } from 'react';
 import { ApolloWrapper } from '@/context/apollo-provider';
 import { SavedDataProvider } from '@/context/local-provider';
-
-import { loadErrorMessages, loadDevMessages } from "@apollo/client/dev";
-import { __DEV__ } from '@apollo/client/utilities/globals';
-
-if (__DEV__) {  // Adds messages only in a dev environment
-  loadDevMessages();
-  loadErrorMessages();
-}
 
 const nunito = Nunito({
   subsets: ['latin'],

@@ -2,11 +2,11 @@ import { ReactNode } from "react";
 
 type Props = {
   children: ReactNode;
-  classN?: string;
+  styles?: string;
 }
-export function BluredWrapper({ children, classN }: Props) {
+export function BluredWrapper({ children, styles }: Props) {
   return (
-    <span className={classN} style={{
+    <span className={styles} style={{
       position: 'absolute',
       background: 'rgba(255, 255, 255, 0.20)',
       boxShadow: '2px 2px 48px rgba(0, 0, 0, 0.15)',

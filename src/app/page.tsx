@@ -7,9 +7,14 @@ import { Favorites } from '@/components/Favorites';
 import { Legendary } from '@/components/Legendary';
 
 import { DataProps } from '@/types/api.types';
+import { loadDevMessages, loadErrorMessageHandler, loadErrorMessages } from '@apollo/client/dev';
 
-const query = gql`{
-  legendary: pokemon_v2_pokemon(limit: 20 where: {pokemon_v2_pokemonspecy: {is_legendary: {_eq: true}}}) {
+loadDevMessages();
+loadErrorMessageHandler();
+loadErrorMessages();
+
+const query = gql`query Now($variable: Int!) {
+  legendary: pokemon_v2_pokemon(limit: $variable, where: {pokemon_v2_pokemonspecy: {is_legendary: {_eq: true}}}) {
     id
     name
     weight
@@ -50,9 +55,11 @@ const query = gql`{
 export default async function Home() {
 
   const { data }: DataProps[] | any = await getClient().query({
-    query
+    query,
+    variables: {
+      variable: 20
+    },
   });
-
   return (
     <main className='overflow-x-hidden bg-background'>
       <Header />

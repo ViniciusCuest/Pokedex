@@ -3,7 +3,7 @@ import { DataProps, ResultDataProps } from '@/types/api.types';
 import { Cards } from '../Cards';
 import { useEffect, useState } from 'react';
 import { useSuspenseQuery } from '@apollo/experimental-nextjs-app-support/ssr';
-import { ApolloQueryResult, OperationVariables, gql } from '@apollo/client';
+import { gql } from '@apollo/client';
 import { useLocalData } from '@/context/local-provider';
 export function AllPokemons(prop: DataProps) {
 
@@ -50,35 +50,36 @@ export function AllPokemons(prop: DataProps) {
     }
   });
 
-
   useEffect(() => {
     refetch({
       variable: generationId
     });
-
   }, [generationId]);
 
   return (
     <>
-      <h1
-        className='text-3xl font-bold font-sans mt-12 ml-4 text-black_900 mb-4 sm:mb-8 sm:text-6xl sm:mt-4'
-      >
-        Todos
-      </h1>
-      <select
-        name=''
-        id=''
-        onChange={(evt) => {
-          evt.preventDefault();
-          if (generationId === Number(evt.target.value))
-            return;
+      <div className='flex flex-row items-center justify-between pr-12'>
+        <h1
+          className='text-3xl font-bold font-sans mt-12 ml-4 text-black_900 mb-4 sm:mb-8 sm:text-6xl sm:mt-4'
+        >
+          Todos
+        </h1>
+        <select
+          name=''
+          id=''
+          onChange={(evt) => {
+            evt.preventDefault();
+            if (generationId === Number(evt.target.value))
+              return;
 
-          setGenerationId(Number(evt.target.value));
-        }}
-      >
-        <option value='1'>1</option>
-        <option value='2'>2</option>
-      </select>
+            setGenerationId(Number(evt.target.value));
+          }}
+        >
+          <option value='1'>Geração 1</option>
+          <option value='2'>Geração 2</option>
+          <option value='3'>Geração 3</option>
+        </select>
+      </div>
       <div className='grid grid-cols-5 gap-y-8'>
         {
           data?.poke?.filter((item: any) => !favorites.includes(item.id)).map((item: ResultDataProps) => {
