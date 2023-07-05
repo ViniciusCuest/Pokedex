@@ -2,7 +2,7 @@ export function BackgroundShape() {
   return (
     <span
       className={'shadow-2xl' + `
-        fixed 
+        absolute 
         top-0 
         left-0
         h-full
@@ -11,6 +11,7 @@ export function BackgroundShape() {
         translate-y-[-55%] 
         z-[1]
       bg-background 
+        sm:fixed
         sm:rounded-full
         sm:rotate-[0deg]
         sm:w-[180vw] 

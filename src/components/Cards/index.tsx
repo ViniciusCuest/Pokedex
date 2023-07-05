@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { cardColor } from '@/utils/color-components';
 type Props = {
   size?: 'small' | 'medium' | 'large';
-  isFavorite?: boolean
+  isFavorite?: boolean;
   getLayoutSize?: Dispatch<SetStateAction<number>>;
   favorite: (key: number, generation: number) => void;
   unfavorite: (key: number) => void;
@@ -26,8 +26,6 @@ export function Cards({
   unfavorite,
   getLayoutSize
 }: ResultDataProps & Props): ReactElement {
-
-
 
   const cardSize: string = size === 'small' ?
     'h-56 w-[21rem]' : size === 'medium' ?
@@ -61,7 +59,6 @@ export function Cards({
           }
           unfavorite(id);
         }}
-
       >
         {
           isFavorite ?

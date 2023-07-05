@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useSuspenseQuery } from '@apollo/experimental-nextjs-app-support/ssr';
 import { gql } from '@apollo/client';
 import { useLocalData } from '@/context/local-provider';
+
 export function AllPokemons(prop: DataProps) {
 
   const { handleFavoriteCard, favorites } = useLocalData();
@@ -83,11 +84,13 @@ export function AllPokemons(prop: DataProps) {
       <div className='grid grid-cols-5 gap-y-8'>
         {
           data?.poke?.filter((item: any) => !favorites.includes(item.id)).map((item: ResultDataProps) => {
+            //console.log(cardColor[item.pokemon_v2_pokemontypes[0]?.pokemon_v2_type.name]);
             return (
               <Cards
                 key={item.id}
                 size='small'
                 favorite={handleFavoriteCard}
+                unfavorite={() => { }}
                 {...item}
               />
             )

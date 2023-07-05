@@ -19,6 +19,25 @@ export const cardColor: objType = {
   dark: 'from-max_dark to-min_dark'
 }
 
+export const pokeTypeColor: objType = {
+  bug: 'max_cyan',
+  grass: 'grass1',
+  fire: 'max_orange',
+  poison: 'max_purple',
+  water: 'max_blue',
+  flying: 'max_blue',
+  normal: 'normall',
+  ice: 'max_ice',
+  steel: 'max_steel',
+  rock: 'max_rock',
+  electric: 'max_eletric',
+  ground: 'max_ground',
+  fairy: 'max_fairy',
+  ghost: 'max_ghost',
+  fighting: 'max_fighting',
+  dark: 'max_dark',
+}
+
 export const badgeColor: objType = {
   bug: 'from-bug1 to-bug2',
   grass: 'from-grass1 to-grass2',

@@ -61,7 +61,7 @@ export default async function Home() {
     },
   });
   return (
-    <main className='overflow-x-hidden bg-background'>
+    <main className='bg-background'>
       <Header />
       <Favorites />
       <Legendary data={data.legendary} />

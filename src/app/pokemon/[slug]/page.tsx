@@ -6,6 +6,7 @@ import { Family } from './family';
 import Image from 'next/legacy/image';
 import { BluredWrapper } from './blured-wrapper';
 import { Graph } from '@/components/Graph';
+import { badgeColor, cardColor, pokeTypeColor } from '@/utils/color-components';
 
 interface Props {
   params: {
@@ -20,6 +21,12 @@ export type QueryData = {
     base_experience: any;
     order: number;
     pokemon_species_id: number;
+    pokemon_v2_pokemontypes: [
+      pokemon_v2_type: {
+        id: number;
+        name: string;
+      }
+    ]
   }
 }
 
@@ -73,21 +80,23 @@ export default async function Pokemon({ params }: Props) {
   `;
   const { data }: QueryData | any = await getClient().query({ query, variables: { variable: params.slug } });
 
-
   const image = JSON.parse(data.pokemon_v2_pokemon_by_pk.pokemon_v2_pokemonsprites[0]?.sprites);
+  const type = data.pokemon_v2_pokemon_by_pk.pokemon_v2_pokemontypes[0]?.pokemon_v2_type.name;
+
+
 
   return (
-    <main className='flex justify-center items-center sm:items-center px-3 sm:justify-center bg-max_blue h-[100vh] w-screen sm:w-full z-0'>
+    <main className={`relative flex overflow-y-scroll overflow-x-hidden lg:overflow-y-hidden justify-center px-3 sm:justify-center bg-gradient-to-t ${badgeColor[type]} h-[100%] sm:h-screen w-screen sm:w-full z-0`}>
       <BackgroundShape />
-      <section className='grid w-full px-3 gap-8 grid-areas-slim sm:grid-cols-layout sm:grid-areas-wide sm:px-8'>
-        <section className='grid-in-cover sm:mt-32'>
+      <section className='grid w-full px-2 gap-8 grid-areas-slim grid-cols-1 lg:grid-cols-layout lg:grid-areas-wide lg:px-8'>
+        <section className='flex flex-col justify-center items-center grid-in-cover mt-96 sm:mt-32'>
           <ImageContainer
             src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/${String(image?.other.dream_world.front_default).slice(6)}`}
             {...data.pokemon_v2_pokemon_by_pk}
           />
         </section>
-        <section className='relative w-full grid-in-stats'>
-          <BluredWrapper styles='w-full pt-4 h-20 sm:pt-0 sm:h-auto sm:w-[30rem]'>
+        <section className='relative flex flex-col justify-center items-center w-full grid-in-stats sm:mt-48 space-y-8 sm:space-y-8'>
+          <BluredWrapper styles='w-full pt-4 h-20 sm:pt-0 sm:h-auto xl:w-[28rem]'>
             <div className='p-0 sm:px-9 sm:py-5'>
               <div className='flex flex-row items-center justify-around sm:justify-between'>
                 <span className='text-center'>
@@ -123,12 +132,12 @@ export default async function Pokemon({ params }: Props) {
               </div>
             </div>
           </BluredWrapper>
-          <BluredWrapper styles='w-[80%] absolute bottom-0'>
-            <Graph data={data.pokemon_v2_pokemon_by_pk.pokemon_v2_pokemonstats} />
+          <BluredWrapper styles='w-full mt-0 sm:w-auto'>
+            <Graph pokeType={type} data={data.pokemon_v2_pokemon_by_pk.pokemon_v2_pokemonstats} />
           </BluredWrapper>
         </section>
-        <section className='relative flex justify-end w-full sm:w-auto grid-in-family'>
-          <BluredWrapper styles='w-full mt-20 sm:w-32 sm:flex sm:justify-center'>
+        <section className='relative flex justify-end items-center w-full xl:w-auto grid-in-family'>
+          <BluredWrapper styles='w-full xl:mt-20 xl:w-36 sm:flex sm:justify-center'>
             <Family
               data={data}
               image={image}
