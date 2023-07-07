@@ -5,11 +5,17 @@ import { useEffect, useState } from 'react';
 import { useSuspenseQuery } from '@apollo/experimental-nextjs-app-support/ssr';
 import { gql } from '@apollo/client';
 import { useLocalData } from '@/context/local-provider';
+import { motion } from 'framer-motion';
+
+import { useScrollLock } from '../../hooks/block-scroll';
 
 export function AllPokemons(prop: DataProps) {
 
+  const { activateScroll } = useScrollLock();
+
   const { handleFavoriteCard, favorites } = useLocalData();
 
+  const [selectedId, setSelectedId] = useState<number | null>(null);
   const [generationId, setGenerationId] = useState(1);
 
   const query = gql`query Now($variable: Int!) {
@@ -22,6 +28,15 @@ export function AllPokemons(prop: DataProps) {
       pokemon_v2_type {
         name
         id
+      }
+    }
+    pokemon_v2_pokemonabilities {
+      pokemon_v2_ability {
+        name
+        pokemon_v2_abilityeffecttexts (where: {language_id: {_eq: 9}}) {
+          effect
+          short_effect
+        }
       }
     }
     pokemon_v2_pokemonspecy {
@@ -45,6 +60,7 @@ export function AllPokemons(prop: DataProps) {
   }
 }
   `;
+
   const { error, data, refetch } = useSuspenseQuery(query, {
     variables: {
       variable: generationId
@@ -56,6 +72,10 @@ export function AllPokemons(prop: DataProps) {
       variable: generationId
     });
   }, [generationId]);
+
+  useEffect(() => {
+    console.log(window.screen.width)
+  }, [window.screen]);
 
   return (
     <>
@@ -81,14 +101,15 @@ export function AllPokemons(prop: DataProps) {
           <option value='3'>Geração 3</option>
         </select>
       </div>
-      <div className='grid grid-cols-5 gap-y-8'>
+      <motion.div layout className='grid grid-cols-3 gap-1 xl:grid-cols-4 2xl:grid-cols-5 sm:gap-y-8'>
         {
           data?.poke?.filter((item: any) => !favorites.includes(item.id)).map((item: ResultDataProps) => {
-            //console.log(cardColor[item.pokemon_v2_pokemontypes[0]?.pokemon_v2_type.name]);
             return (
               <Cards
                 key={item.id}
                 size='small'
+                setSelected={setSelectedId}
+                selected={selectedId}
                 favorite={handleFavoriteCard}
                 unfavorite={() => { }}
                 {...item}
@@ -96,8 +117,27 @@ export function AllPokemons(prop: DataProps) {
             )
           })
         }
-      </div>
+        <motion.span
+          onClick={() => {
+            setSelectedId(null);
+            activateScroll();
+          }}
+          animate={{
+            opacity: !!selectedId ? .35 : 0,
+            zIndex: !!selectedId ? 500 : -1,
+          }}
+          transition={{ duration: .5, type: 'tween' }}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            backgroundColor: 'black',
+            height: '100vh',
+            opacity: 0,
+            width: '100vw',
+            zIndex: -1
+          }}
+        />
+      </motion.div>
     </>
-
   );
 }

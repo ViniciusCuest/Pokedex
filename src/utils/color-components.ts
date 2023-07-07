@@ -20,9 +20,9 @@ export const cardColor: objType = {
 }
 
 export const pokeTypeColor: objType = {
-  bug: 'max_cyan',
+  bug: 'bug1',
   grass: 'grass1',
-  fire: 'max_orange',
+  fire: 'fire1',
   poison: 'max_purple',
   water: 'max_blue',
   flying: 'max_blue',

@@ -7,7 +7,6 @@ import tailwindConfig from '../../../tailwind.config';
 const fullConfig: any = resolveConfig(tailwindConfig);
 
 export function Graph({ data, pokeType }: any) {
-  console.log(fullConfig?.theme?.colors[`${pokeTypeColor[pokeType]}`])
   return (
     <div className=" px-4 py-2 sm:px-6 sm:py-5 space-y-1 lg:w-[26rem]">
       {

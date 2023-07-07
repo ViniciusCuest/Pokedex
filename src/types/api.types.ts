@@ -9,6 +9,15 @@ export type ResultDataProps = {
       name: string;
     }
   }]
+  pokemon_v2_pokemonabilities: [{
+    pokemon_v2_ability: {
+      name: string;
+      pokemon_v2_abilityeffecttexts: [{
+        effect: string;
+        short_effect: string;
+      }]
+    }
+  }]
   pokemon_v2_pokemonspecy: {
     is_legendary: boolean;
     is_mythical: boolean;

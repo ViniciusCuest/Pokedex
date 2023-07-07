@@ -1,9 +1,15 @@
 'use client';
+import { motion } from 'framer-motion';
 import Image from 'next/legacy/image';
 
 export function ImageContainer({ src, name }: { src: string; name: string }) {
   return (
-    <figure className='flex items-center flex-col justify-center mt-[-15rem] sm:mt-[-8rem]'>
+    <motion.figure
+      initial={{ opacity: 0, y: -30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: .5, type: 'tween' }}
+      className='flex items-center flex-col justify-center mt-[-15rem] sm:mt-[-8rem] z-50'
+    >
       <div className='relative w-[60vw] h-[60vw] sm:w-[26rem] sm:h-[26rem]'>
         <Image
           layout='fill'
@@ -26,6 +32,6 @@ export function ImageContainer({ src, name }: { src: string; name: string }) {
           name[0].toUpperCase() + name.substring(1)
         }
       </figcaption>
-    </figure>
+    </motion.figure>
   );
 }

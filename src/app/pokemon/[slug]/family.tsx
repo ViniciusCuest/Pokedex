@@ -2,7 +2,6 @@
 
 import Image from 'next/legacy/image';
 export function Family({ data, image }: any) {
-  console.log(data);
   const family: [] = data.pokemon_v2_pokemon_by_pk.pokemon_v2_pokemonspecy.pokemon_v2_evolutionchain.pokemon_v2_pokemonspecies;
   return (
     <div className='relative flex flex-row items-center justify-around px-4 py-3 sm:space-x-12 rounded-xl lg:flex-col md:space-x-0 md:w-full'>

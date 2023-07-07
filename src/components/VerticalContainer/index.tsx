@@ -46,7 +46,7 @@ export function VerticalContainer({ data, legendary = false, title }: DataProps 
         ref={scrollComponentRef}
         className='relative pt-3 px-5 sm:pt-32 sm:mt-14 sm:pl-14 sm:pr-[37rem] sm:mr-9 sm:overflow-x-scroll sm:overflow-y-hidden select-none'>
         <div
-          className='grid w-auto gap-4 gap-x-4 grid-cols-2 sm:flex sm:flex-row sm:gap-x-11 sm:min-w-fit sm:p-5 sm:ml-[-.9rem]'>
+          className='grid w-auto gap-4 gap-x-2 grid-cols-2 sm:flex sm:flex-row sm:gap-x-11 sm:min-w-fit sm:p-5 sm:ml-[-.9rem]'>
           {
             data?.filter((item: ResultDataProps) => String(item.id) === search ||
               item.name.toLowerCase().includes(search.toLowerCase())).map((item: ResultDataProps) => {

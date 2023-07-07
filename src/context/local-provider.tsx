@@ -31,7 +31,6 @@ export function SavedDataProvider({ children }: Props): ReactElement {
   }, []);
 
   const handleUnfavouriteCard = (id: number) => {
-    console.log(favoritesId.filter(item => item !== id));
     setFavoritesId(prev => [
       ...prev.filter((item: number) => item !== id)
     ]);
