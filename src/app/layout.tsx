@@ -1,4 +1,3 @@
-'use client'
 import '../styles/globals.css'
 import { Nunito } from 'next/font/google';
 import Loading from './loading';
@@ -25,16 +24,15 @@ export default function RootLayout({
   return (
     <html lang='en' className={`${nunito.variable}`}>
       <body>
-        <Suspense fallback={<Loading />}>
-          <ApolloWrapper>
-            <SavedDataProvider>
+        <ApolloWrapper>
+          <SavedDataProvider>
+            <Suspense fallback={<Loading />}>
               {
                 children
               }
-            </SavedDataProvider>
-          </ApolloWrapper>
-        </Suspense>
-
+            </Suspense>
+          </SavedDataProvider>
+        </ApolloWrapper>
       </body>
     </html>
   )

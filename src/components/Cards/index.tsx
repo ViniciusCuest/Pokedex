@@ -2,7 +2,7 @@
 import { ResultDataProps } from '@/types/api.types';
 import { Avatar } from '../Avatars';
 import { Badge } from '../Badges';
-import { Dispatch, ReactElement, SetStateAction, useEffect } from 'react';
+import { Dispatch, ReactElement, SetStateAction, useEffect, useState } from 'react';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import { MdOutlineArrowRight } from 'react-icons/md';
 import Link from 'next/link';
@@ -80,10 +80,16 @@ export function Cards({
 
   const { blockScroll } = useScrollLock();
 
+  const [windowClient, setWindowClient] = useState<any>({ width: 0 });
+
+  useEffect(() => {
+    setWindowClient(window.screen);
+  }, []);
+
   return (
     <motion.section
       animate={selected === id ? "open" : "closed"}
-      variants={window.screen.width < 670 ? variantsMobile : variants}
+      variants={windowClient.width < 670 ? variantsMobile : variants}
       layout
       transition={{ type: 'tween', duration: .3 }}
       onClick={() => {
@@ -132,33 +138,30 @@ export function Cards({
         <div>
           <span className='flex flex-row items-center'>
             <Avatar
-              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/${String(image?.other.dream_world.front_default).slice(6)}`}
+              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/${String(image?.other.dream_world.front_default || image.other.home.front_default).slice(6)}`}
             />
-            {
-              (size !== 'small' || window.screen.width > 630) &&
+            <div
+              className={`${size === 'small' ? 'hidden' : 'flex'} sm:flex flex-col mt-0 sm:mt-3 ml-1 space-y-1 sm:ml-3`}
+            >
+              <span className='flex items-center justify-center w-16 h-[1.1rem] rounded-md sm:h-6 mb-1 bg-white font-sans font-bold text-[.75rem] sm:text-base text-gray_700 sm:rounded-lg'>
+                #{
+                  id
+                }
+              </span>
+              <h1 className='hidden sm:font-sans font-semibold text-white sm:text-3xl sm:block'>
+                {
+                  name[0].toUpperCase() + name.substring(1)
+                }
+              </h1>
               <div
-                className='flex flex-col mt-7 sm:mt-3 ml-1 space-y-1 sm:ml-3'
-              >
-                <span className='flex items-center justify-center w-16 h-[1.1rem] rounded-md sm:h-6 mb-1 bg-white font-sans font-bold text-[.75rem] sm:text-base text-gray_700 sm:rounded-lg'>
-                  #{
-                    id
-                  }
-                </span>
-                <h1 className='hidden sm:font-sans font-semibold text-white sm:text-3xl sm:block'>
-                  {
-                    name[0].toUpperCase() + name.substring(1)
-                  }
-                </h1>
-                <div
-                  className='flex flex-col space-y-1 sm:grid sm:grid-cols-2 sm:gap-3 sm:space-y-0'>
-                  {
-                    pokemon_v2_pokemontypes.map(({ pokemon_v2_type }) => (
-                      <Badge key={String(pokemon_v2_type.id)} title={pokemon_v2_type.name} />
-                    ))
-                  }
-                </div>
+                className='flex flex-col space-y-1 sm:grid sm:grid-cols-2 sm:gap-3 sm:space-y-0'>
+                {
+                  pokemon_v2_pokemontypes.map(({ pokemon_v2_type }) => (
+                    <Badge key={String(pokemon_v2_type.id)} title={pokemon_v2_type.name} />
+                  ))
+                }
               </div>
-            }
+            </div>
           </span>
           <h1 className='text-lg font-sans text-white font-bold sm:hidden'>
             {
@@ -208,7 +211,10 @@ export function Cards({
             {
               (!!pokemon_v2_pokemonabilities) &&
               pokemon_v2_pokemonabilities.map(item => (
-                <li className='font-sans text-xs sm:text-sm text-white px-8'>
+                <li 
+                  key={item.id}
+                  className='font-sans text-xs sm:text-sm text-white px-8'
+                  >
                   {
                     item.pokemon_v2_ability.pokemon_v2_abilityeffecttexts[0].short_effect
                   }

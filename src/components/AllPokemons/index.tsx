@@ -1,5 +1,5 @@
 'use client';
-import { DataProps, ResultDataProps } from '@/types/api.types';
+import { DataProps, GenerationProps, ResultDataProps } from '@/types/api.types';
 import { Cards } from '../Cards';
 import { useEffect, useState } from 'react';
 import { useSuspenseQuery } from '@apollo/experimental-nextjs-app-support/ssr';
@@ -8,8 +8,9 @@ import { useLocalData } from '@/context/local-provider';
 import { motion } from 'framer-motion';
 
 import { useScrollLock } from '../../hooks/block-scroll';
+import { SelectOption } from '../SelectOption';
 
-export function AllPokemons(prop: DataProps) {
+export function AllPokemons() {
 
   const { activateScroll } = useScrollLock();
 
@@ -31,6 +32,7 @@ export function AllPokemons(prop: DataProps) {
       }
     }
     pokemon_v2_pokemonabilities {
+      id
       pokemon_v2_ability {
         name
         pokemon_v2_abilityeffecttexts (where: {language_id: {_eq: 9}}) {
@@ -58,13 +60,26 @@ export function AllPokemons(prop: DataProps) {
       sprites
     }
   }
+  generation: pokemon_v2_generation {
+    id
+    pokemon_v2_region {
+      pokemon_v2_regionnames (where: {language_id: {_eq: 9}}) {
+        name,
+        id
+      }
+    }
+    pokemon_v2_generationnames (where: {language_id: {_eq: 9}}) {
+      name
+      id
+    }
+  }
 }
   `;
 
-  const { error, data, refetch } = useSuspenseQuery(query, {
+  const { error, data, refetch } = useSuspenseQuery<{ poke?: ResultDataProps[], generation: GenerationProps[] }>(query, {
     variables: {
       variable: generationId
-    }
+    },
   });
 
   useEffect(() => {
@@ -73,37 +88,23 @@ export function AllPokemons(prop: DataProps) {
     });
   }, [generationId]);
 
-  useEffect(() => {
-    console.log(window.screen.width)
-  }, [window.screen]);
-
   return (
     <>
       <div className='flex flex-row items-center justify-between pr-12'>
-        <h1
-          className='text-3xl font-bold font-sans mt-12 ml-4 text-black_900 mb-4 sm:mb-8 sm:text-6xl sm:mt-4'
-        >
+        <h1 className='text-3xl font-bold font-sans mt-12 ml-4 text-black_900 mb-4 sm:mb-8 sm:text-6xl sm:mt-4'>
           Todos
         </h1>
-        <select
-          name=''
-          id=''
-          onChange={(evt) => {
-            evt.preventDefault();
-            if (generationId === Number(evt.target.value))
-              return;
-
-            setGenerationId(Number(evt.target.value));
-          }}
-        >
-          <option value='1'>Geração 1</option>
-          <option value='2'>Geração 2</option>
-          <option value='3'>Geração 3</option>
-        </select>
+        <SelectOption
+          data={data.generation}
+          change={{
+            value: generationId,
+            action: setGenerationId
+          }}  
+        />
       </div>
       <motion.div layout className='grid grid-cols-3 gap-1 xl:grid-cols-4 2xl:grid-cols-5 sm:gap-y-8'>
         {
-          data?.poke?.filter((item: any) => !favorites.includes(item.id)).map((item: ResultDataProps) => {
+          data.poke?.filter((item) => !favorites.includes(item.id)).map((item: ResultDataProps) => {
             return (
               <Cards
                 key={item.id}
@@ -140,4 +141,27 @@ export function AllPokemons(prop: DataProps) {
       </motion.div>
     </>
   );
+}
+{
+  /*
+          <select
+          value={generationId}
+          onChange={(evt) => {
+            evt.preventDefault();
+            if (generationId === Number(evt.target.value))
+              return;
+            setGenerationId(Number(evt.target.value));
+          }}
+        >
+          {
+            data.generation.map((item) => (
+              <option key={item.id} value={item.pokemon_v2_generationnames[0].id}>
+                {
+                  item.pokemon_v2_generationnames[0].name
+                }
+              </option>
+            ))
+          }
+        </select>
+  */
 }

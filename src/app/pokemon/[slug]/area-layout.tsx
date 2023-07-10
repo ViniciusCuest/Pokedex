@@ -14,6 +14,7 @@ export function AreaLayout({ data, type }: any) {
   const image = JSON.parse(data.pokemon_v2_pokemon_by_pk.pokemon_v2_pokemonsprites[0]?.sprites);
 
   useEffect(() => {
+    console.log(image)
     activateScroll();
   }, []);
 
@@ -29,7 +30,7 @@ export function AreaLayout({ data, type }: any) {
         <section
           className='flex flex-col justify-center items-center grid-in-cover mt-96 sm:mt-32'>
           <ImageContainer
-            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/${String(image?.other.dream_world.front_default).slice(6)}`}
+            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/${String(image?.other.dream_world.front_default || image.other.home.front_default).slice(6)}`}
             {...data.pokemon_v2_pokemon_by_pk}
           />
           <Image className='fixed z-[-3] top-0 mb-[20rem] sm:absolute sm:right-0 ml-[5rem] rotate-[30deg] opacity-[.08]' priority layout='fill' src={`https://raw.githubusercontent.com/duiker101/pokemon-type-svg-icons/5781623f147f1bf850f426cfe1874ba56a9b75ee/icons/${type}.svg`} />

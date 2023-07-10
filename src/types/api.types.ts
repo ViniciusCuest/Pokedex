@@ -10,6 +10,7 @@ export type ResultDataProps = {
     }
   }]
   pokemon_v2_pokemonabilities: [{
+    id: number;
     pokemon_v2_ability: {
       name: string;
       pokemon_v2_abilityeffecttexts: [{
@@ -37,7 +38,20 @@ export type ResultDataProps = {
   pokemon_v2_pokemonsprites: [{
     sprites: string;
   }];
+}
 
+export type GenerationProps = {
+  id: number;
+  pokemon_v2_region: {
+    pokemon_v2_regionnames: [{
+      id: number;
+      name: string
+    }]
+  }
+  pokemon_v2_generationnames: [{
+    id: number;
+    name: string;
+  }];
 }
 
 export type DataProps = {
