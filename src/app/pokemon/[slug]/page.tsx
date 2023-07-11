@@ -87,6 +87,9 @@ export default async function Pokemon({ params }: Props) {
         sprites
       }
     }
+    pokemon_v2_generation {
+      id
+    }
   }
   `;
   const { data }: QueryData | any = await getClient().query({ query, variables: { variable: params.slug } });

@@ -5,13 +5,7 @@ import { Header } from '@/components/Header';
 import { AllPokemons } from '@/components/AllPokemons';
 import { Favorites } from '@/components/Favorites';
 import { Legendary } from '@/components/Legendary';
-
 import { DataProps } from '@/types/api.types';
-import { loadDevMessages, loadErrorMessageHandler, loadErrorMessages } from '@apollo/client/dev';
-
-loadDevMessages();
-loadErrorMessageHandler();
-loadErrorMessages();
 
 const query = gql`query Now($variable: Int!) {
   legendary: pokemon_v2_pokemon(limit: $variable, where: {pokemon_v2_pokemonspecy: {is_legendary: {_eq: true}}}) {
@@ -53,7 +47,6 @@ const query = gql`query Now($variable: Int!) {
 `;
 
 export default async function Home() {
-
   const { data }: DataProps[] | any = await getClient().query({
     query,
     variables: {
@@ -66,7 +59,7 @@ export default async function Home() {
       <Favorites />
       <Legendary data={data.legendary} />
       <section className='relative pt-3 px-5 sm:py-8 sm:mt-8 sm:pl-14'>
-        <AllPokemons data={[]} />
+        <AllPokemons />
       </section>
     </main>
   );

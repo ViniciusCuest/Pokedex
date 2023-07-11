@@ -35,7 +35,7 @@ export const pokeTypeColor: objType = {
   fairy: 'max_fairy',
   ghost: 'max_ghost',
   fighting: 'max_fighting',
-  dark: 'max_dark',
+  dark: 'dark1',
 }
 
 export const badgeColor: objType = {
@@ -46,5 +46,6 @@ export const badgeColor: objType = {
   water: 'from-water1 to-water2',
   flying: 'from-max_blue to-min_blue',
   normal: 'from-normall to-normal2',
-  rock: 'from-max_rock to-min_rock'
+  rock: 'from-max_rock to-min_rock',
+  dark: 'from-dark1 to-dark2'
 }

@@ -1,7 +1,9 @@
 'use client';
 import {
+  Dispatch,
   ReactElement,
   ReactNode,
+  SetStateAction,
   createContext,
   useContext,
   useEffect,
@@ -10,8 +12,10 @@ import {
 
 type ContextProps = {
   favorites: number[];
+  generationId: number;
   handleFavoriteCard: (id: number) => void;
   handleUnfavouriteCard: (id: number) => void;
+  handleChangeGenerationId: (id: number) => void;
 }
 
 type Props = {
@@ -23,12 +27,21 @@ export const DataContext = createContext({} as ContextProps)
 export function SavedDataProvider({ children }: Props): ReactElement {
 
   const [favoritesId, setFavoritesId] = useState<number[]>([1]);
+  const [generationId, setGenerationId] = useState<number>(1);
+
   useEffect(() => {
     const favoritesExist: string | null = window.localStorage.getItem('@POKEDEX:favorites');
     if (!favoritesExist)
       return;
     setFavoritesId(JSON.parse(favoritesExist));
   }, []);
+
+  const handleChangeGenerationId = (id: number) => {
+    if (id === generationId)
+      return;
+
+    setGenerationId(id);
+  }
 
   const handleUnfavouriteCard = (id: number) => {
     setFavoritesId(prev => [
@@ -52,8 +65,10 @@ export function SavedDataProvider({ children }: Props): ReactElement {
   return (
     <DataContext.Provider value={{
       favorites: favoritesId,
+      generationId,
       handleFavoriteCard,
-      handleUnfavouriteCard
+      handleUnfavouriteCard,
+      handleChangeGenerationId
     }}>
       {
         children

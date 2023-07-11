@@ -48,6 +48,8 @@ module.exports = {
       gray_500: '#D9D9D9',
       fire1: '#FF5C00',
       fire2: '#FF8945',
+      dark1: '#000',
+      dark2: '#343153',
       grass1: '#00B61D',
       normall: '#0DAABF',
       normal2: '#17D2EA',

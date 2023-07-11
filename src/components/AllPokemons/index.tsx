@@ -10,16 +10,8 @@ import { motion } from 'framer-motion';
 import { useScrollLock } from '../../hooks/block-scroll';
 import { SelectOption } from '../SelectOption';
 
-export function AllPokemons() {
 
-  const { activateScroll } = useScrollLock();
-
-  const { handleFavoriteCard, favorites } = useLocalData();
-
-  const [selectedId, setSelectedId] = useState<number | null>(null);
-  const [generationId, setGenerationId] = useState(1);
-
-  const query = gql`query Now($variable: Int!) {
+const query = gql`query Now($variable: Int!) {
   poke: pokemon_v2_pokemon(limit: 100, where: {pokemon_v2_pokemonspecy: {pokemon_v2_generation: {id: {_eq: $variable }}}}) {
     id
     name
@@ -76,17 +68,20 @@ export function AllPokemons() {
 }
   `;
 
-  const { error, data, refetch } = useSuspenseQuery<{ poke?: ResultDataProps[], generation: GenerationProps[] }>(query, {
+export function AllPokemons() {
+
+  const { activateScroll } = useScrollLock();
+
+  const { handleFavoriteCard, favorites, generationId } = useLocalData();
+
+  const [selectedId, setSelectedId] = useState<number | null>(null);
+
+  const { data } = useSuspenseQuery<{ poke?: ResultDataProps[], generation: GenerationProps[] }>(
+    query, {
     variables: {
       variable: generationId
-    },
+    }
   });
-
-  useEffect(() => {
-    refetch({
-      variable: generationId
-    });
-  }, [generationId]);
 
   return (
     <>
@@ -94,13 +89,7 @@ export function AllPokemons() {
         <h1 className='text-3xl font-bold font-sans mt-12 ml-4 text-black_900 mb-4 sm:mb-8 sm:text-6xl sm:mt-4'>
           Todos
         </h1>
-        <SelectOption
-          data={data.generation}
-          change={{
-            value: generationId,
-            action: setGenerationId
-          }}  
-        />
+        <SelectOption data={data.generation} />
       </div>
       <motion.div layout className='grid grid-cols-3 gap-1 xl:grid-cols-4 2xl:grid-cols-5 sm:gap-y-8'>
         {
@@ -141,27 +130,4 @@ export function AllPokemons() {
       </motion.div>
     </>
   );
-}
-{
-  /*
-          <select
-          value={generationId}
-          onChange={(evt) => {
-            evt.preventDefault();
-            if (generationId === Number(evt.target.value))
-              return;
-            setGenerationId(Number(evt.target.value));
-          }}
-        >
-          {
-            data.generation.map((item) => (
-              <option key={item.id} value={item.pokemon_v2_generationnames[0].id}>
-                {
-                  item.pokemon_v2_generationnames[0].name
-                }
-              </option>
-            ))
-          }
-        </select>
-  */
 }

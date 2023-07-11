@@ -138,7 +138,7 @@ export function Cards({
         <div>
           <span className='flex flex-row items-center'>
             <Avatar
-              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/${String(image?.other.dream_world.front_default || image.other.home.front_default).slice(6)}`}
+              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/${String(image.other.dream_world.front_default || image.other.home.front_default || image.other['official-artwork'].front_default).slice(6)}`}
             />
             <div
               className={`${size === 'small' ? 'hidden' : 'flex'} sm:flex flex-col mt-0 sm:mt-3 ml-1 space-y-1 sm:ml-3`}

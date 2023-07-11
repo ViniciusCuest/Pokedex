@@ -1,9 +1,14 @@
 'use client';
 import { GenerationProps } from '@/types/api.types';
 import { Variants, motion } from 'framer-motion';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useState } from 'react';
 import { GrMapLocation } from 'react-icons/gr';
 import { MdCatchingPokemon } from 'react-icons/md'
+import resolveConfig from 'tailwindcss/resolveConfig'
+import tailwindConfig from '../../../tailwind.config';
+import { useLocalData } from '@/context/local-provider';
+
+const fullConfig: any = resolveConfig(tailwindConfig);
 
 const variants: Variants = {
   open: {
@@ -16,9 +21,9 @@ const variants: Variants = {
   }
 }
 
-export function SelectOption({ data, change }: { data: GenerationProps[], change: { value: number; action: Dispatch<SetStateAction<number>> }; }) {
+export function SelectOption({ data }: { data: GenerationProps[]; }) {
   const [open, setOpen] = useState<boolean>(false);
-  const { value, action } = change;
+  const { generationId, handleChangeGenerationId } = useLocalData();
   return (
     <div className='relative mr-4 bg-max_red w-64 rounded-lg cursor-pointer select-none'>
       <div
@@ -28,10 +33,10 @@ export function SelectOption({ data, change }: { data: GenerationProps[], change
         }}>
         <label className='font-sans text-lg font-semibold text-white'>
           {
-            data.find(item => item.id === value)?.pokemon_v2_generationnames[0].name
+            data.find(item => item.id === generationId)?.pokemon_v2_generationnames[0].name
           }
         </label>
-        <MdCatchingPokemon size={20} />
+        <MdCatchingPokemon color={`${fullConfig?.theme?.colors.black_900}`} size={20} />
       </div>
       <motion.ul
         variants={variants}
@@ -47,16 +52,19 @@ export function SelectOption({ data, change }: { data: GenerationProps[], change
               key={item.id}
               value={item.id}
               className='flex flex-grow flex-row text-center p-2 items-center justify-around font-sans text-lg border-t-[1px] gap-x-2 border-background'
-              onClick={(evt) => action(evt.currentTarget.value)}
+              onClick={(evt) => {
+                evt.preventDefault();
+                handleChangeGenerationId(+evt.currentTarget.value);
+              }}
             >
-              <span>
+              <span className='text-black_900'>
                 {
                   item.pokemon_v2_generationnames[0].name
                 }
               </span>
-                -
+              -
               <span className='flex flex-row items-center gap-x-2'>
-                <GrMapLocation size={20} />
+                <GrMapLocation color={`${fullConfig?.theme?.colors.black_900}`} size={20} />
                 {
                   item.pokemon_v2_region.pokemon_v2_regionnames[0]?.name
                 }

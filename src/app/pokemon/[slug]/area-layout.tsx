@@ -7,14 +7,15 @@ import Image from 'next/legacy/image';
 import { BluredWrapper } from './blured-wrapper';
 import { Graph } from '@/components/Graph';
 import { BackgroundShape } from '@/components/BackgroundShape';
-import { badgeColor, pokeTypeColor } from '@/utils/color-components';
+import { badgeColor } from '@/utils/color-components';
 import { useScrollLock } from '@/hooks/block-scroll';
+
 export function AreaLayout({ data, type }: any) {
   const { activateScroll } = useScrollLock();
-  const image = JSON.parse(data.pokemon_v2_pokemon_by_pk.pokemon_v2_pokemonsprites[0]?.sprites);
 
+  const image = JSON.parse(data.pokemon_v2_pokemon_by_pk.pokemon_v2_pokemonsprites[0]?.sprites);
+  console.log();
   useEffect(() => {
-    console.log(image)
     activateScroll();
   }, []);
 
@@ -28,12 +29,12 @@ export function AreaLayout({ data, type }: any) {
         className='grid w-full px-2 gap-8 grid-areas-slim grid-cols-1 lg:grid-cols-layout lg:grid-areas-wide lg:px-8'
       >
         <section
-          className='flex flex-col justify-center items-center grid-in-cover mt-96 sm:mt-32'>
+          className='flex flex-col select-none justify-center items-center grid-in-cover mt-96 sm:mt-32'>
           <ImageContainer
-            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/${String(image?.other.dream_world.front_default || image.other.home.front_default).slice(6)}`}
+            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/${String(image?.other.dream_world.front_default || image.other.home.front_default || image.other['official-artwork'].front_default).slice(6)}`}
             {...data.pokemon_v2_pokemon_by_pk}
           />
-          <Image className='fixed z-[-3] top-0 mb-[20rem] sm:absolute sm:right-0 ml-[5rem] rotate-[30deg] opacity-[.08]' priority layout='fill' src={`https://raw.githubusercontent.com/duiker101/pokemon-type-svg-icons/5781623f147f1bf850f426cfe1874ba56a9b75ee/icons/${type}.svg`} />
+          <Image className='fixed z-[-3] top-0 mb-[20rem] sm:absolute sm:right-0 ml-[5rem] rotate-[30deg] opacity-[.08] select-none' priority layout='fill' src={`https://raw.githubusercontent.com/duiker101/pokemon-type-svg-icons/5781623f147f1bf850f426cfe1874ba56a9b75ee/icons/${type}.svg`} />
         </section>
         <motion.section
           initial={{ opacity: 0, y: -30 }}

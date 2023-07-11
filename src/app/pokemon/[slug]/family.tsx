@@ -15,7 +15,7 @@ export function Family({ data, image }: any) {
             >
               <div className='relative w-20 h-24'>
                 <Image
-                  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/${String(itemImage.other.dream_world.front_default).slice(6)}`}
+                  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/${String(itemImage.other.dream_world.front_default || itemImage.other.home.front_default || itemImage.other['official-artwork'].front_default).slice(6)}`}
                   layout='fill'
                 />
               </div>

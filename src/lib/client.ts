@@ -6,9 +6,6 @@ const { getClient } = registerApolloClient(() => {
     cache: new InMemoryCache(),
     link: new HttpLink({
       uri: 'https://beta.pokeapi.co/graphql/v1beta',
-      fetchOptions: {
-        cache: 'force-cache'
-      }
     })
   })
 });
