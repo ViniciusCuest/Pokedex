@@ -16,6 +16,10 @@ module.exports = {
         'wide': [
           'stats cover family',
         ],
+        'medium': [
+          'cover family family',
+          'stats stats stats'
+        ],
         'slim': [
           'cover',
           'stats',
@@ -74,10 +78,20 @@ module.exports = {
       min_fairy: '#FF60A2',
       max_ghost: '#575479',
       min_ghost: '#7171A0',
-      max_fighting: '#E0C6AB',
-      min_fighting: '#ECD2B7',
+      max_fighting: '#B48E65',
+      min_fighting: '#E1B587',
+      fighting1: '#AE8050',
+      fighting2: '#DBB289',
       max_dark: '#252431',
-      min_dark: '#343153'
+      min_dark: '#343153',
+      max_psychic: '#810097',
+      min_psychic: '#AE36C1',
+      ice1: '#4C9BBD',
+      ice2: '#82CAE8',
+      fairy1: '#CB0256',
+      fairy2: '#FF4793',
+      psychic1: '#510E5C',
+      psychic2: '#810097'
     }
   },
   plugins: [

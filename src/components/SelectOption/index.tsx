@@ -31,7 +31,7 @@ export function SelectOption({ data }: { data: GenerationProps[]; }) {
         onClick={() => {
           setOpen(prev => !prev);
         }}>
-        <label className='font-sans text-lg font-semibold text-white'>
+        <label className='cursor-pointer font-sans text-lg font-semibold text-white'>
           {
             data.find(item => item.id === generationId)?.pokemon_v2_generationnames[0].name
           }
@@ -55,6 +55,7 @@ export function SelectOption({ data }: { data: GenerationProps[]; }) {
               onClick={(evt) => {
                 evt.preventDefault();
                 handleChangeGenerationId(+evt.currentTarget.value);
+                setOpen(false);
               }}
             >
               <span className='text-black_900'>

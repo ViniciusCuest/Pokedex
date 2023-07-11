@@ -15,7 +15,7 @@ export function ImageContainer({ src, name }: { src: string; name: string }) {
           layout='fill'
           src={src}
           className='z-10'
-          priority
+          priority={true}
         />
       </div>
       <span

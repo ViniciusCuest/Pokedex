@@ -91,7 +91,7 @@ export function AllPokemons() {
         </h1>
         <SelectOption data={data.generation} />
       </div>
-      <motion.div layout className='grid grid-cols-3 gap-1 xl:grid-cols-4 2xl:grid-cols-5 sm:gap-y-8'>
+      <motion.div layout className='grid grid-cols-3 gap-1 sm:grid-cols-4 lg:grid-cols-3 2xl:grid-cols-5 sm:gap-y-8'>
         {
           data.poke?.filter((item) => !favorites.includes(item.id)).map((item: ResultDataProps) => {
             return (

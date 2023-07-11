@@ -8,7 +8,7 @@ const fullConfig: any = resolveConfig(tailwindConfig);
 
 export function Graph({ data, pokeType }: any) {
   return (
-    <div className=" px-4 py-2 sm:px-6 sm:py-5 space-y-1 lg:w-[26rem]">
+    <div className=" px-4 py-2 sm:px-6 sm:py-5 space-y-1 xl:w-[26rem]">
       {
         data.map((item: { id: number; base_stat: number; pokemon_v2_stat: { name: string } }) => {
           return (

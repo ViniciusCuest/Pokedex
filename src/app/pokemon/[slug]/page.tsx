@@ -51,6 +51,7 @@ export default async function Pokemon({ params }: Props) {
         }
       }
       pokemon_v2_pokemontypes {
+        id
         pokemon_v2_type {
           name
           id
@@ -98,7 +99,7 @@ export default async function Pokemon({ params }: Props) {
   const type = data.pokemon_v2_pokemon_by_pk.pokemon_v2_pokemontypes[0]?.pokemon_v2_type.name;
 
   return (
-    <main className={`relative flex overflow-y-scroll overflow-x-hidden lg:overflow-y-hidden justify-center px-3 bg-gradient-to-t ${badgeColor[type]} h-[100%] sm:h-screen w-screen sm:w-full z-0`}>
+    <main className={`relative flex overflow-y-scroll overflow-x-hidden xl:overflow-y-hidden justify-center px-3 bg-gradient-to-t ${badgeColor[type]} h-[100%] sm:h-screen w-screen sm:w-full z-0`}>
       <AreaLayout data={data} type={type} />
     </main>
   );

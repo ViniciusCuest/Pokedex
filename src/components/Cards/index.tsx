@@ -68,7 +68,7 @@ export function Cards({
   getLayoutSize
 }: ResultDataProps & Props): ReactElement {
   const cardSize: string = size === 'small' ?
-    'w-28 p-0 flex-col justify-center h-40 sm:h-56 sm:w-[21rem]' :
+    'w-28 p-0 flex-col justify-center h-40 sm:h-56 sm:w-[10rem] lg:w-[21rem]' :
     size === 'medium' ?
       'w-[calc((100% / 2) - (1.25rem * 2 + 1rem)] h-44 sm:w-96 sm:h-80'
       :

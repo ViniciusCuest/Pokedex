@@ -16,7 +16,8 @@ export const cardColor: objType = {
   fairy: 'from-max_fairy to-min_fairy',
   ghost: 'from-max_ghost to-min_ghost',
   fighting: 'from-max_fighting to-min_fighting',
-  dark: 'from-max_dark to-min_dark'
+  dark: 'from-max_dark to-min_dark',
+  psychic: 'from-max_psychic to-min_psychic'
 }
 
 export const pokeTypeColor: objType = {
@@ -24,18 +25,19 @@ export const pokeTypeColor: objType = {
   grass: 'grass1',
   fire: 'fire1',
   poison: 'max_purple',
-  water: 'max_blue',
+  water: 'water1',
   flying: 'max_blue',
   normal: 'normall',
-  ice: 'max_ice',
+  ice: 'ice1',
   steel: 'max_steel',
   rock: 'max_rock',
   electric: 'max_eletric',
   ground: 'max_ground',
-  fairy: 'max_fairy',
+  fairy: 'fairy1',
   ghost: 'max_ghost',
-  fighting: 'max_fighting',
+  fighting: 'fighting1',
   dark: 'dark1',
+  psychic: 'psychic1'
 }
 
 export const badgeColor: objType = {
@@ -47,5 +49,9 @@ export const badgeColor: objType = {
   flying: 'from-max_blue to-min_blue',
   normal: 'from-normall to-normal2',
   rock: 'from-max_rock to-min_rock',
-  dark: 'from-dark1 to-dark2'
+  dark: 'from-dark1 to-dark2',
+  psychic: 'from-psychic1 to-psychic2',
+  fighting: 'from-fighting1 to-fighting2',
+  fairy: 'from-fairy1 to-fairy2',
+  ice: 'from-ice1 to-ice2'
 }
