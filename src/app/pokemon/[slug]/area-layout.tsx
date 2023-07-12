@@ -14,10 +14,10 @@ export function AreaLayout({ data, type }: any) {
   const { activateScroll } = useScrollLock();
 
   const image = JSON.parse(data.pokemon_v2_pokemon_by_pk.pokemon_v2_pokemonsprites[0]?.sprites);
-  console.log();
+
   useEffect(() => {
     activateScroll();
-  }, [activateScroll]);
+  }, [data, activateScroll]);
 
   return (
     <>

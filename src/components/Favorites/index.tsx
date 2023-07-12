@@ -39,7 +39,7 @@ const query = gql`query Now($variable: [Int]!) {
 
 export function Favorites() {
   const { favorites } = useLocalData();
-  const { data } = useSuspenseQuery(query, {
+  const { data }: { data: any } = useSuspenseQuery(query, {
     variables: {
       variable: favorites
     }
