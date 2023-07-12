@@ -85,13 +85,13 @@ export function AllPokemons() {
 
   return (
     <>
-      <div className='flex flex-row items-center justify-between pr-12'>
-        <h1 className='text-3xl font-bold font-sans mt-12 ml-4 text-black_900 mb-4 sm:mb-8 sm:text-6xl sm:mt-4'>
+      <div className='flex flex-row items-center justify-between my-8 sm:my-0 sm:pr-12'>
+        <h1 className='text-3xl font-bold font-sans sm:ml-4 text-black_900 sm:mb-8 sm:text-6xl sm:mt-4'>
           Todos
         </h1>
         <SelectOption data={data.generation} />
       </div>
-      <motion.div layout className='grid grid-cols-3 gap-1 sm:grid-cols-4 lg:grid-cols-3 2xl:grid-cols-5 sm:gap-y-8'>
+      <motion.div layout className='grid justify-items-center grid-cols-3 gap-1 sm:grid-cols-4 lg:grid-cols-3 2xl:grid-cols-5 sm:gap-y-8'>
         {
           data.poke?.filter((item) => !favorites.includes(item.id)).map((item: ResultDataProps) => {
             return (

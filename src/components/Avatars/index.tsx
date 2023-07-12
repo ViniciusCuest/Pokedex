@@ -4,16 +4,17 @@ import { ClassAttributes, useEffect } from 'react';
 
 interface Props {
   src: string;
+  scale?: boolean
   className?: string;
   alt?: string
   type?: 'default' | 'small';
 }
 
-export function Avatar({ src, type = 'default', alt, className }: Props) {
+export function Avatar({ src, type = 'default', alt, className, scale }: Props) {
 
   return type === 'default' ?
     (<div
-      className={`relative flex items-center justify-center w-20 h-20 bg-gray_500 rounded-2xl border-4 border-white sm:w-32 sm:h-32 ${className}`}
+      className={`relative flex items-center justify-center ${scale ? 'h-32 w-32': 'w-[4.75rem] h-[4.75rem]'} bg-gray_500 rounded-2xl border-4 border-white md:w-24 md:h-24 lg:w-32 lg:h-32 ${className}`}
     >
       < Image
         alt={alt}

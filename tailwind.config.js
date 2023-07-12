@@ -86,12 +86,16 @@ module.exports = {
       min_dark: '#343153',
       max_psychic: '#810097',
       min_psychic: '#AE36C1',
+      ghost1: '#323045',
+      ghost2: '#60609A',
       ice1: '#4C9BBD',
       ice2: '#82CAE8',
       fairy1: '#CB0256',
       fairy2: '#FF4793',
       psychic1: '#510E5C',
-      psychic2: '#810097'
+      psychic2: '#810097',
+      min_dragon: '#1DD077',
+      max_dragon: '#058C43'
     }
   },
   plugins: [
