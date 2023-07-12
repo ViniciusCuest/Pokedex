@@ -18,6 +18,7 @@ export function VerticalContainer({ data, legendary = false, title }: DataProps 
 
   const cardsGap: number = 44; //2.75rem + 10px
 
+  const [val, setVal] = useState<number | null>(null);
   const [search, setSearch] = useState<string>('');
 
   // const [_data, setData] = useState([...data]);
@@ -52,6 +53,8 @@ export function VerticalContainer({ data, legendary = false, title }: DataProps 
               item.name.toLowerCase().includes(search.toLowerCase())).map((item: ResultDataProps) => {
                 return (
                   <Cards
+                    selected={null}
+                    setSelected={setVal}
                     getLayoutSize={setCurrentCardWidth}
                     key={String(item.id)}
                     isFavorite={favorites.includes(item.id)}
