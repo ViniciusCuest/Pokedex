@@ -13,6 +13,7 @@ export function ImageContainer({ src, name }: { src: string; name: string }) {
       <div className='relative w-[60vw] h-[60vw] sm:w-[26rem] sm:h-[26rem]'>
         <Image
           layout='fill'
+          alt='Cover Image of the Pokemon'
           src={src}
           className='z-10'
           priority={true}

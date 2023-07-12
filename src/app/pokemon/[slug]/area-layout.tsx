@@ -17,7 +17,7 @@ export function AreaLayout({ data, type }: any) {
   console.log();
   useEffect(() => {
     activateScroll();
-  }, []);
+  }, [activateScroll]);
 
   return (
     <>
@@ -35,7 +35,7 @@ export function AreaLayout({ data, type }: any) {
             {...data.pokemon_v2_pokemon_by_pk}
 
           />
-          <Image fetchPriority='high' className='fixed z-[-3] top-0 mb-[20rem] sm:absolute sm:right-0 ml-[5rem] rotate-[30deg] opacity-[.08] select-none' priority layout='fill' src={`https://raw.githubusercontent.com/duiker101/pokemon-type-svg-icons/5781623f147f1bf850f426cfe1874ba56a9b75ee/icons/${type}.svg`} />
+          <Image fetchPriority='high' alt='Background layer - type of pokemon' className='fixed z-[-3] top-0 mb-[20rem] sm:absolute sm:right-0 ml-[5rem] rotate-[30deg] opacity-[.08] select-none' priority layout='fill' src={`https://raw.githubusercontent.com/duiker101/pokemon-type-svg-icons/5781623f147f1bf850f426cfe1874ba56a9b75ee/icons/${type}.svg`} />
         </section>
         <motion.section
           initial={{ opacity: 0, y: -30 }}
@@ -64,7 +64,7 @@ export function AreaLayout({ data, type }: any) {
                             className={`p-2 rounded-full bg-gradient-to-t ${badgeColor[item.pokemon_v2_type.name]}`}
                           >
                             <span className='flex relative w-7 h-7'>
-                              <Image priority layout='fill' src={`https://raw.githubusercontent.com/duiker101/pokemon-type-svg-icons/5781623f147f1bf850f426cfe1874ba56a9b75ee/icons/${item.pokemon_v2_type.name}.svg`} />
+                              <Image priority layout='fill' alt='pokemon type' src={`https://raw.githubusercontent.com/duiker101/pokemon-type-svg-icons/5781623f147f1bf850f426cfe1874ba56a9b75ee/icons/${item.pokemon_v2_type.name}.svg`} />
                             </span>
                           </div>
                         )
@@ -98,6 +98,7 @@ export function AreaLayout({ data, type }: any) {
                     src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/${String(image?.other.dream_world.front_default).slice(6)}`}
                     layout='fill'
                     priority
+                    alt='Image of next evolution of the selected Pokemon'
                   />
                 </figure>
               </div>

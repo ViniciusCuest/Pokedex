@@ -1,7 +1,7 @@
 'use client';
 import { ResultDataProps } from '@/types/api.types';
-import { Avatar } from '../Avatars';
-import { Badge } from '../Badges';
+import { Avatar } from '@/components/Avatars'
+import { Badge } from '@/components/Badges';
 import { Dispatch, ReactElement, SetStateAction, useEffect, useState } from 'react';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import { MdOutlineArrowRight } from 'react-icons/md';

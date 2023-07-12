@@ -18,6 +18,7 @@ export function Family({ data, image }: any) {
                   priority
                   src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/${String(itemImage.other.dream_world.front_default || itemImage.other.home.front_default || itemImage.other['official-artwork'].front_default).slice(6)}`}
                   layout='fill'
+                  alt={`Image of the Pokemon - ${item.name}`}
                 />
               </div>
               <figcaption className='font-sans text-xl sm:text-2xl text-white mt-1 sm:mb-5'>
