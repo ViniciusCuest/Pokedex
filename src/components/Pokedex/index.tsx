@@ -16,7 +16,7 @@ export function Pokedex({ search, changeScrollPosition }: Props) {
         <div className={`h-[500px] w-[390px] rounded-md p-5 shadow-xl bg-gradient-to-b from-max_red to-min_red`}>
           <Avatar
             alt='github-photo'
-            src={'https://avatars.githubusercontent.com/u/61607007?v=4'}
+            src={''}
             className='rounded-full sm:border-black_900 border-8 sm:w-44 sm:h-44'
           />
           <form
