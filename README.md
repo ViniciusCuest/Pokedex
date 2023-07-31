@@ -77,7 +77,3 @@ Follow some related Projects.
 ## 🛠 Skills
 NextJS, React, Typescript, TailwindCSS, Fetch API, Apollo CLient 
 
-
-## Demonstration
-
-Soon...
