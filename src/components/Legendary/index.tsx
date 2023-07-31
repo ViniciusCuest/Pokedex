@@ -5,7 +5,7 @@ import { VerticalContainer } from "../VerticalContainer";
 export function Legendary({ data }: any) {
   return (
     <VerticalContainer
-      title='Favorites'
+      title='Legendary'
       data={data}
       legendary={true}
     />

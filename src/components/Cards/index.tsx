@@ -1,6 +1,6 @@
 'use client';
 import { ResultDataProps } from '@/types/api.types';
-import { Avatar } from '@/components/Avatars'
+import { Avatar } from '@/components/Avatars';
 import { Badge } from '@/components/Badges';
 import { Dispatch, ReactElement, SetStateAction, useEffect, useState } from 'react';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
@@ -9,6 +9,8 @@ import Link from 'next/link';
 import { cardColor } from '@/utils/color-components';
 import { Variants, motion } from 'framer-motion';
 import { useScrollLock } from '@/hooks/block-scroll';
+import { useRouter } from 'next/navigation';
+
 type Props = {
   size?: 'small' | 'medium' | 'large';
   isFavorite?: boolean;
@@ -21,7 +23,7 @@ type Props = {
 
 const variants: Variants = {
   open: {
-    width: '35vw',
+    width: '40%',
     height: '30vh',
     overflow: 'hidden',
     position: 'fixed',
@@ -31,8 +33,25 @@ const variants: Variants = {
     zIndex: 1000,
   },
   closed: {
-    margin: '0px',
+    margin: 0,
     scale: 1
+  }
+}
+const variantsTablet: Variants = {
+  open: {
+    width: '70%',
+    height: '35vh',
+    overflow: 'hidden',
+    position: 'fixed',
+    inset: 0,
+    margin: 'auto',
+    padding: 16,
+    scale: 1.1,
+    zIndex: 1000,
+  },
+  closed: {
+    margin: 0,
+    scale: 1,
   }
 }
 const variantsMobile: Variants = {
@@ -48,9 +67,15 @@ const variantsMobile: Variants = {
     zIndex: 1000,
   },
   closed: {
-    margin: '0px',
+    margin: 0,
     scale: 1,
   }
+}
+
+export const cardSize: { small: string; medium: string; large: string; } = {
+  small: 'w-[calc((100vw_/_3)_-_16px)] p-0 flex-col sm:justify-center h-40 sm:h-56 sm:w-[calc((100vw_/_4)_-_24px)] lg:w-[calc((100vw_/_3)_-_32px)] xl:w-[20.8rem] 2xl:w-[21rem]',
+  medium: 'w-[calc((100%_/_2)_-_(1.25rem_*_2_+_1rem)] h-44 sm:w-96 sm:h-80',
+  large: 'sm:w-[36rem] sm:h-[21rem]'
 }
 
 export function Cards({
@@ -68,18 +93,15 @@ export function Cards({
   unfavorite,
   getLayoutSize
 }: ResultDataProps & Props): ReactElement {
-  const cardSize: string = size === 'small' ?
-    'w-28 p-0 flex-col sm:justify-center h-40 sm:h-56 sm:w-[10rem] lg:w-[21rem]' :
-    size === 'medium' ?
-      'w-[calc((100% / 2) - (1.25rem * 2 + 1rem)] h-44 sm:w-96 sm:h-80'
-      :
-      'sm:w-[36rem] sm:h-[21rem]';
 
   const image = JSON.parse(pokemon_v2_pokemonsprites[0]?.sprites);
   const evolvesTo = pokemon_v2_pokemonspecy?.pokemon_v2_evolutionchain.pokemon_v2_pokemonspecies.find(item => item.evolves_from_species_id == id);
   const type = pokemon_v2_pokemontypes[0]?.pokemon_v2_type.name;
 
+
   const { blockScroll } = useScrollLock();
+
+  const route = useRouter();
 
   const [windowClient, setWindowClient] = useState<any>({ width: 0 });
 
@@ -90,13 +112,14 @@ export function Cards({
   return (
     <motion.section
       animate={selected === id ? "open" : "closed"}
-      variants={windowClient.width < 1024 ? variantsMobile : variants}
+      variants={windowClient.width < 768 ?
+        variantsMobile :
+        windowClient.width < 1024 ?
+          variantsTablet :
+          variants
+      }
       layout
       transition={{ type: 'tween', duration: .3 }}
-      onClick={() => {
-        setSelected(id);
-        blockScroll();
-      }}
       onLoad={(e) => {
         if (getLayoutSize)
           getLayoutSize(e.currentTarget.clientWidth);
@@ -105,7 +128,8 @@ export function Cards({
         if (getLayoutSize)
           getLayoutSize(e.currentTarget.clientWidth);
       }}
-      className={`relative flex items-center overflow-hidden justify-center bg-gradient-to-b ${cardColor[type]} shadow-lg  cursor-pointer p-2 rounded-lg ${cardSize} sm:rounded-lg sm:p-6`}
+      className={`relative flex items-center overflow-hidden justify-center bg-gradient-to-b ${cardColor[type]} shadow-lg  cursor-pointer p-2 rounded-lg ${cardSize[size]} sm:rounded-lg sm:p-6`}
+      data-testid="card-container"
     >
       <button
         className='hidden sm:block absolute top-0 right-0 m-5'
@@ -135,7 +159,18 @@ export function Cards({
           <MdOutlineArrowRight size={25} />
         </Link>
       }
-      <section className='flex flex-col lg:flex-row justify-normal items-center sm:justify-around'>
+      <section
+        className='flex flex-col md:flex-row justify-normal items-center sm:justify-around'
+        onClick={(e) => {
+          e.preventDefault();
+          if (size !== 'small') {
+            route.push(`/pokemon/${id}`);
+            return;
+          }
+          setSelected(id);
+          blockScroll();
+        }}
+      >
         <div className={`${selected === id && 'flex flex-col'}`}>
           <span className='flex flex-row items-center'>
             <Avatar

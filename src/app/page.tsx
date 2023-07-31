@@ -58,7 +58,7 @@ export default async function Home() {
       <Header />
       <Favorites />
       <Legendary data={data.legendary} />
-      <section className='relative pt-3 px-5 sm:py-8 sm:mt-8 sm:pl-14'>
+      <section className='relative pt-3 px-5 sm:py-8 sm:mt-8 lg:pl-14'>
         <AllPokemons />
       </section>
     </main>
